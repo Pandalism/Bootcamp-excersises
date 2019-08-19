@@ -46,6 +46,10 @@ def reshape_temperature_data(measurements):
     The returned pandas.DataFrame should sort the values by location first and then by temperature measurement.
     It should also drop any missing values and reset the index of the returned DataFrame.
 
+    NOTE: If measurements is empty your function should return and empty dataframe:
+        location       date   value
+
+
     Example input:
 
        location  Jan-2018  Feb-2018  Mar-2018  April-2018  May-2018  June-2018
@@ -81,6 +85,8 @@ def compute_events_matrix_count(events):
     Write a function that takes a pandas.DataFrame containing 2 columns representing web events for a user:
     "user_id" and "event".
     This function should return a new DataFrame where each event value becomes a new column in the returned DataFrame.
+    We expect the columns (events) to be in alphabetical order.
+    
     For each event value, you need to calculate the count of that particular event for each userid.
     Missing values should be filled with 0.
     Effectively, this function calculates the number of occurrence for each event type (columns) for each user (rows).
@@ -98,8 +104,7 @@ def compute_events_matrix_count(events):
 
     Expected output:
 
-    event	click	pause	play
-    user_id
+        	click	pause	play
     1234	2.0	    0.0	    1.0
     3456	0.0	    1.0	    0.0
     4321	1.0	    0.0	    1.0
