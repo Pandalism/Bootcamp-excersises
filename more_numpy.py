@@ -21,21 +21,26 @@ def all_unique_chars(string):
 
 def find_element(sq_mat, val):
     """
-    Write a function that takes a square matrix of integers and returns the
-    position (i,j) of a value. The position should be returned as a list of two
-    integers. You need to return only one position. if the value is present
-    multiple times, a single valid position should be returned.
+    Write a function that takes a square matrix of integers and returns a set of all valid 
+    positions (i,j) of a value. Each position should be returned as a tuple of two
+    integers.
 
     The matrix is structured in the following way:
     - each row has strictly decreasing values with the column index increasing
     - each column has strictly decreasing values with the row index increasing
     The following matrix is an example:
 
-    Example:
+    Example 1 :
     mat = [ [10, 7, 5],
             [ 9, 4, 2],
             [ 5, 2, 1] ]
-    find_element(mat, 4) --> [1, 1]
+    find_element(mat, 4) --> {(1, 1)}
+
+    Example 2 :
+    mat = [ [10, 7, 5],
+            [ 9, 4, 2],
+            [ 5, 2, 1] ]
+    find_element(mat, 5) --> {(0, 2), (2, 0)} 
 
     The function should raise an exception ValueError if the value isn't found.
 
@@ -43,8 +48,8 @@ def find_element(sq_mat, val):
     :type sq_mat:  numpy.array of int
     :param val:    the value to be found in the matrix
     :type val:     int
-    :return:      the position of the value in the matrix
-    :rtype:        list of int
+    :return:       all positions of the value in the matrix
+    :rtype:        set of tuple of int
     :raise ValueError:
     """
 
@@ -82,8 +87,6 @@ def largest_sum(intlist):
     Example:
     [-1, 2, 7, -3] --> the sublist with larger sum is [2, 7], the sum is 9.
 
-    Time complexity target: linear in the number of integers in the list.
-
     :param intlist: input list of integers
     :type intlist:  list of int
     :return:       the largest sum
@@ -101,7 +104,7 @@ def pairprod(intlist, val):
     The ordering of the pairs does not matter.
 
     Example:
-    ([3, 5, 1, 2, 3, 6], 6) --> [(2, 3), (1, 6)]
+    ([3, 5, 1, 2, 3, 6], 6) --> {(2, 3), (1, 6)}
 
     Complexity target: subquadratic
 
@@ -109,9 +112,9 @@ def pairprod(intlist, val):
     :type intlist:  list of int
     :param val:     given value products will be compared to
     :type val:      int
-    :return:       pairs of elements such that the product of corresponding
+    :return:        pairs of elements such that the product of corresponding
                     entries matches the value val
-    :rtype:         list of tuple
+    :rtype:         set of tuple
     """
 
     raise NotImplementedError

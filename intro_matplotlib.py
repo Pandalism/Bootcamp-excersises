@@ -25,6 +25,9 @@ def draw_equations_plot():
     Add a legend, title for the x-axis and a title to the curve, the x-axis
     should range from -4 to 4 (with 50 points) and the y axis should range
     from 0 to 2. The figure should have a size of 8x6 inches.
+
+    NOTE: Make sure you create the figure at the beginning as doing it at the 
+    end will reset any plotting you have done.
     """
 
     raise NotImplementedError
