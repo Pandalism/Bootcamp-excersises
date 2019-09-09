@@ -1,21 +1,57 @@
-class EnergyModel:
+def preprocess(df):
+    """This function takes a dataframe and preprocesses it so it is
+    ready for the training stage.
 
-    def __init__(self):
+    The DataFrame contains the time axis and the target column.
 
-        self.model = None
+    It also contains some rows for which the target column is unknown.
+    Those are the observations you will need to predict for KATE 
+    to evaluate the performance of your model.
 
-    def preprocess_training_data(self, df):
+    Here you will need to return the training time serie: ts together
+    with the preprocessed evaluation time serie: ts_eval.
 
-        raise NotImplementedError
+    Make sure you return ts_eval separately! It needs to contain
+    all the rows for evaluation -- they are marked with the column
+    evaluation_set. You can easily select them with pandas:
 
-    def fit(self, X, y):
+         - df.loc[df.evaluation_set]
 
-        raise NotImplementedError
 
-    def preprocess_unseen_data(self, df):
+    :param df: the dataset
+    :type df: pd.DataFrame
+    :return: ts, ts_eval
+    """
 
-        raise NotImplementedError
+    raise NotImplementedError
 
-    def predict(self, X):
 
-        raise NotImplementedError
+def train(ts):
+    """Trains a new model on ts and returns it.
+
+    :param ts: your processed training time serie
+    :type ts: pd.DataFrame
+    :return: a trained model
+    """
+
+    raise NotImplementedError
+
+
+def predict(model, ts_test):
+    """This functions takes your trained model as well 
+    as a processed test time serie and returns predictions.
+
+    On KATE, the processed testt time serie will be the ts_eval you built
+    in the "preprocess" function. If you're testing your functions locally,
+    you can try to generate predictions using a sample test set of your
+    choice.
+
+    This should return your predictions either as a pd.DataFrame with one column
+    or a pd.Series
+
+    :param model: your trained model
+    :param ts_test: a processed test time serie (on KATE it will be ts_eval)
+    :return: y_pred, your predictions
+    """
+
+    raise NotImplementedError
