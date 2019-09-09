@@ -11,6 +11,7 @@ def draw_co2_plot():
     Create a line graph of CO2 versus time, the line should be a blue dashed
     line. Add a title and axis titles to the plot.
     """
+
     raise NotImplementedError
 
 
@@ -31,3 +32,5 @@ def draw_equations_plot():
     """
 
     raise NotImplementedError
+
+

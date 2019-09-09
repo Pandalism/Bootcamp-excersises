@@ -66,8 +66,6 @@ def filter_matrix(mat):
       [5, 2, 0, 2],   -->    [0, 0, 0, 0],
       [0, 1, 3, 3] ]         [0, 0, 0, 0] ]
 
-    The complexity of the function should be linear in n and p.
-
     :param mat: input matrix
     :type mat:  numpy.array of int
     :return:   a matrix where rows and columns of zero entries in mat are zero
@@ -96,25 +94,3 @@ def largest_sum(intlist):
     raise NotImplementedError
 
 
-def pairprod(intlist, val):
-    """
-    Write a function that takes in a list of positive integers (elements > 0)
-    and returns all unique pairs of elements whose product is equal to a given
-    value. The pairs should all be of the form (i, j) with i<=j.
-    The ordering of the pairs does not matter.
-
-    Example:
-    ([3, 5, 1, 2, 3, 6], 6) --> {(2, 3), (1, 6)}
-
-    Complexity target: subquadratic
-
-    :param intlist: input list of integers
-    :type intlist:  list of int
-    :param val:     given value products will be compared to
-    :type val:      int
-    :return:        pairs of elements such that the product of corresponding
-                    entries matches the value val
-    :rtype:         set of tuple
-    """
-
-    raise NotImplementedError

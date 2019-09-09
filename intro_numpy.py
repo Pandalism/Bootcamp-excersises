@@ -108,3 +108,5 @@ def gradient_descent(x_0, learning_rate, tol):
     """
 
     raise NotImplementedError
+
+
