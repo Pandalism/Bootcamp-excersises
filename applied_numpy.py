@@ -73,3 +73,5 @@ def block_matrix(A, B):
     """
 
     raise NotImplementedError
+
+

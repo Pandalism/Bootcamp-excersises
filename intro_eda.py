@@ -67,6 +67,7 @@ def feature_cleaner(df, low, high):
 
     raise NotImplementedError
 
+
 def get_feature(df):
     """
     Take a dataframe where all columns are numerical (no NaNs) and not constant.
@@ -101,6 +102,7 @@ def get_feature(df):
 
     raise NotImplementedError
 
+
 def one_hot_encode(label_to_encode, labels):
     """
     Write a function that takes in a label to encode and a list of possible
@@ -120,3 +122,5 @@ def one_hot_encode(label_to_encode, labels):
     """
 
     raise NotImplementedError
+
+

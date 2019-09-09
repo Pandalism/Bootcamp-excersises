@@ -187,3 +187,5 @@ def find_outliers_pca(df, n, scale):
     """
 
     raise NotImplementedError
+
+

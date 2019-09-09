@@ -77,6 +77,7 @@ def reshape_temperature_data(measurements):
     :return: a pandas.DataFrame containing three columns "location", "Date", "Value" with a row
     for each temperature measurement in a given location. There should be no missing values.
     """
+
     raise NotImplementedError
 
 
@@ -115,3 +116,5 @@ def compute_events_matrix_count(events):
     """
 
     raise NotImplementedError
+
+
