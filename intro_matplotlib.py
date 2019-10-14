@@ -9,7 +9,11 @@ def draw_co2_plot():
       CO2 concentration (ppm): 250, 265, 272, 260, 300, 320, 389
 
     Create a line graph of CO2 versus time, the line should be a blue dashed
-    line. Add a title and axis titles to the plot.
+    line.
+
+    The title of the plot should be 'Chemistry data'
+    The label of the x axis should be 'Time (decade)'
+    The label of the y axis should be 'CO2 concentration (ppm)'
     """
 
     raise NotImplementedError
