@@ -6,7 +6,7 @@ apply various data aggregations and transformations.
 
 def get_prices_for_heaviest_item(inventory):
     """
-    Write a function that takes a pandas.DataFrame with four column: "category", "price", "weight", "in_stock"
+    Write a function that takes a pandas.DataFrame with four columns: "category", "price", "weight", "in_stock"
     and returns a pandas.Series containing the price of the heaviest weight per category of items still in stock.
     You can assume that no items in the same category have the same weight to make things simpler to reason about.
     The returned Series should not have an index name and the values should be sorted in descending order.
@@ -21,6 +21,7 @@ def get_prices_for_heaviest_item(inventory):
     3   books         20    300     True
 
 
+    Note: entries of in_stock are booleans.
     Expected output:
 
     electronics    300
@@ -40,7 +41,7 @@ def reshape_temperature_data(measurements):
     """
     Write a function that takes a pandas.DataFrame with 7 columns:
      "location", 'Jan-2018', 'Feb-2018', 'Mar-2018', "April-2018", "May-2018", "June-2018".
-    This DataFrame represents temperature measurements in the first two quarter of 2018 for a particular city.
+    This DataFrame represents temperature measurements in the first two quarters of 2018 for a particular city.
     This function should return a new DataFrame containing three columns: "location", "Date", "Value"
     and where each row represents a measurement in particular location at a particular date.
     The returned pandas.DataFrame should sort the values by location first and then by temperature measurement.
@@ -74,7 +75,7 @@ def reshape_temperature_data(measurements):
 
     :param measurements: pandas.DataFrame with seven columns:
     "location", 'Jan-2018', 'Feb-2018', 'Mar-2018', "April-2018", "May-2018", "June-2018"
-    :return: a pandas.DataFrame containing three columns "location", "Date", "Value" with a row
+    :return: a pandas.DataFrame containing three columns "location", "date", "value" with a row
     for each temperature measurement in a given location. There should be no missing values.
     """
 
