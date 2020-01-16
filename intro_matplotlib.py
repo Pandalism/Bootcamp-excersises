@@ -14,6 +14,10 @@ def draw_co2_plot():
     The title of the plot should be 'Chemistry data'
     The label of the x axis should be 'Time (decade)'
     The label of the y axis should be 'CO2 concentration (ppm)'
+
+    Your function does not need to return the plot - 
+    the final line of the function should be (assuming you have imported pyplot as plt):
+    plt.show()
     """
 
     raise NotImplementedError
@@ -32,7 +36,7 @@ def draw_equations_plot():
     from 0 to 2. The figure should have a size of 8x6 inches.
 
     NOTE: Make sure you create the figure at the beginning as doing it at the 
-    end will reset any plotting you have done.
+    end will reset any plotting you have done, and again finish with plt.show()
     """
 
     raise NotImplementedError
