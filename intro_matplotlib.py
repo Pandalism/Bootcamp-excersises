@@ -49,7 +49,26 @@ def draw_equations_plot():
     NOTE: Make sure you create the figure at the beginning as doing it at the 
     end will reset any plotting you have done, and again finish with plt.show()
     """
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-    raise NotImplementedError
+    # Constants
+    xsteps  = 50
+    xstart  = -4
+    xend    = 4
 
+    # compute
+    xseries = np.linspace(xstart, xend, xsteps)
+    ycos    = np.cos(xseries)
+    ysq     = xseries ** 2
+    yexp    = np.e ** (-1 * ysq)
 
+    # graph
+    plt.figure(figsize=(8,6))
+    plt.plot(xseries, ycos, 'r--', label="y = cos(x)")
+    plt.plot(xseries, ysq, 'b', linewidth=3, label="y = x ** 2")
+    plt.plot(xseries, yexp, 'k', label="y = exp(-1 * x ** 2)")
+    plt.legend()
+    plt.show()
+
+    return True
