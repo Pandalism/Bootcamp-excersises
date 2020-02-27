@@ -20,7 +20,18 @@ def draw_co2_plot():
     plt.show()
     """
 
-    raise NotImplementedError
+    import matplotlib.pyplot as plt
+
+    # create data
+    time = [0, 1, 2, 3, 4, 5, 6]
+    co2 = [250, 265, 272, 260, 300, 320, 389]
+
+    plt.plot(time, co2, 'b--')
+    plt.title("Chemistry Data")
+    plt.xlabel('Time (decade)')
+    plt.ylabel('CO2 concentration (ppm)')
+
+    return True
 
 
 def draw_equations_plot():
