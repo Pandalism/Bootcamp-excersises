@@ -14,8 +14,13 @@ def zero_insert(x):
     :return: input vector with elements separated by 4 zeros
     :rtype: numpy.array
     """
+    insertlen = 4
 
-    raise NotImplementedError
+    for i in range(len(x)-1):
+        for j in range(insertlen):
+            x.insert((i*(1+insertlen))+j+1, 0)
+
+    return x
 
 
 def return_closest(x, val):
