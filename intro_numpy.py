@@ -14,6 +14,8 @@ def zero_insert(x):
     :return: input vector with elements separated by 4 zeros
     :rtype: numpy.array
     """
+    import numpy as np
+
     # constants
     insertlen = 4
 
