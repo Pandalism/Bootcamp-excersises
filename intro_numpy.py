@@ -14,13 +14,17 @@ def zero_insert(x):
     :return: input vector with elements separated by 4 zeros
     :rtype: numpy.array
     """
+    # constants
     insertlen = 4
 
-    for i in range(len(x)-1):
-        for j in range(insertlen):
-            x.insert((i*(1+insertlen))+j+1, 0)
+    xreshape = x.reshape((len(x),1))
+    zeros = np.zeros((len(x),insertlen))
 
-    return x
+    # concatenate zero matrix and original
+    output = np.concatenate((xreshape,zeros),axis=1)
+
+    # flatten concatenation to achive gaps
+    return output.reshape(1,-1)
 
 
 def return_closest(x, val):
