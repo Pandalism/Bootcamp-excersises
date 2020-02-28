@@ -26,7 +26,7 @@ def zero_insert(x):
     output = np.concatenate((xreshape,zeros),axis=1)
 
     # flatten concatenation to achive gaps
-    return output.reshape(1,-1)
+    return output.reshape(-1)
 
 
 def return_closest(x, val):
