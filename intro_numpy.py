@@ -19,14 +19,21 @@ def zero_insert(x):
     # constants
     insertlen = 4
 
-    xreshape = x.reshape((len(x),1))
-    zeros = np.zeros((len(x),insertlen))
+    # create initial return array and inserted zeros
+    tempoutput = x[0:1]
+    insert = np.zeros(insertlen)
 
-    # concatenate zero matrix and original
-    output = np.concatenate((xreshape,zeros),axis=1)
-
-    # flatten concatenation to achive gaps
-    return output.reshape(-1)
+    # loop and build output
+    if len(x) == 1:
+        output = tempoutput
+    else:
+        for i in range(len(x)-1):
+            tempoutput = np.concatenate((tempoutput, insert))
+            tempoutput = np.concatenate((tempoutput, x[i+1:i+2]))
+        output = tempoutput
+    
+    # output
+    return output
 
 
 def return_closest(x, val):
@@ -47,8 +54,10 @@ def return_closest(x, val):
     :rtype: int | float
     :raise ValueError:
     """
-
-    raise NotImplementedError
+    # subtract the desired number, find the absolute, then find the index of the min
+    mask = argmin(abs(x - val))
+    
+    return x[mask]
 
 
 def cauchy(x, y):
