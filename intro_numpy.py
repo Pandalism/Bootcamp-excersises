@@ -83,13 +83,15 @@ def cauchy(x, y):
     """
     import numpy as np
 
-    output = np.zeros(len(x),len(y))
+    
+
+    output = np.zeros((len(x),len(y)))
     for i in range(len(x)):
         for j in range(len(y)):
             if (x[i] - y[j] == 0):
                 raise ValueError
             output[i,j] = 1 / (x[i] - y[j])
-            
+
     return output
 
 
