@@ -55,7 +55,7 @@ def return_closest(x, val):
     :raise ValueError:
     """
     import numpy as np
-    
+
     # subtract the desired number, find the absolute, then find the index of the min
     mask = np.argmin(abs(x - val))
     
@@ -81,8 +81,16 @@ def cauchy(x, y):
     :rtype: numpy.array of float
     :raise ValueError:
     """
+    import numpy as np
 
-    raise NotImplementedError
+    output = np.zeros(len(x),len(y))
+    for i in range(len(x)):
+        for j in range(len(y)):
+            if (x[i] - y[j] == 0):
+                raise ValueError
+            output[i,j] = 1 / (x[i] - y[j])
+            
+    return output
 
 
 def most_similar(x, v_list):
