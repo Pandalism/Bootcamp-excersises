@@ -54,8 +54,10 @@ def return_closest(x, val):
     :rtype: int | float
     :raise ValueError:
     """
+    import numpy as np
+    
     # subtract the desired number, find the absolute, then find the index of the min
-    mask = argmin(abs(x - val))
+    mask = np.argmin(abs(x - val))
     
     return x[mask]
 
