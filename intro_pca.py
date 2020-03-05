@@ -142,10 +142,10 @@ def distance_in_n_dimensions(df, point_a, point_b, n, scale):
 
 
 def find_outliers_pca(df, n, scale):
-    """Apply PCA on a given DataFrame df and transofmr all the data to be expressed
+    """Apply PCA on a given DataFrame df and transform all the data to be expressed
     on the first principal component (you can discard other components)
 
-    With all those points in a one-dimension space, find outliers by looking for points 
+    With all those points in a one-dimension space, find outliers by looking for points
     that lie at more than n standard deviations from the mean.
 
     You should return a new dataframe containing all the rows of the original dataset
@@ -170,6 +170,14 @@ def find_outliers_pca(df, n, scale):
     Compute the mean of this one dimensional dataset and find all rows that lie at more
     than n standard deviations from it.
 
+    Note that the formula for the standard deviation varies, depending on whether we
+    want an unbiased estimator of the variance of the infinite population, or a maximum
+    likelihood estimate of the variance for a normally distributed variable.
+    Specifically, in the case of an unbiased estimator, the average squared deviation is
+    calculated as x.sum() / N - 1. For a maximum likelihood estimate, the formula is
+    x.sum() / N. While pandas uses the former, numpy uses the latter which can lead to
+    unexpected differences. For this exercise, use the unbiased estimator.
+
     Here, if n==1, only the row 2 is an outlier.
 
     So you should return:
@@ -187,5 +195,4 @@ def find_outliers_pca(df, n, scale):
     """
 
     raise NotImplementedError
-
 
