@@ -158,22 +158,19 @@ def largest_sum(intlist):
 
     # case where sublists need to be found
     else:
-        sublists = []
-        templist = []
-        for i, ibool in enumerate(x):
-            if ibool:
-                templist.append(A[i])
-            else:
-                if len(templist) != 0:
-                    sublists.append(templist)
-                templist = []
-        if len(templist) != 0:
-            sublists.append(templist)
+        sum_list = []
+        temp_sum_pos = 0
+        temp_sum = 0
+        for i, ai in enumerate(A):
+            # add up numbers as marching down the lane
+            temp_sum += ai
+            # add only if positive
+            if ai > 0:
+                temp_sum_pos += ai
+            if temp_sum <= 0:
+                sum_list.append(temp_sum_pos)
+                temp_sum = 0
+                temp_sum_pos = 0
 
-        # perform sum on rows
-        sum_list = [sum(a) for a in sublists]
-
-        # output the highest sum out of them
         output = max(sum_list)
-
     return output
