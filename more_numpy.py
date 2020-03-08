@@ -90,9 +90,27 @@ def filter_matrix(mat):
     :return:   a matrix where rows and columns of zero entries in mat are zero
     :rtype:    numpy.array
     """
+    # find position of zeros 
+    zeros = list(find_element(mat, 0))
 
+    # find unique col and rows to convert to 0
 
-    raise NotImplementedError
+    uniq_col = []
+    uniq_row = []
+
+    for tuples in zeros:
+        if tuples[0] not in uniq_row:
+            uniq_row.append(tuples[0])
+        if tuples[1] not in uniq_col:
+            uniq_col.append(tuples[1])
+    
+    for i in uniq_row:
+        mat[i,:] = 0
+
+    for j in uniq_col:
+        mat[:,j] = 0
+
+    return mat
 
 
 def largest_sum(intlist):
