@@ -51,7 +51,7 @@ def find_element(sq_mat, val):
     mat = [ [10, 7, 5],
             [ 9, 4, 2],
             [ 5, 2, 1] ]
-    find_element(mat, 5) --> {(0, 2), (2, 0)} 
+    find_element(mat, 5) --> {(0, 2), (2, 0)}
 
     The function should raise an exception ValueError if the value isn't found.
 
@@ -115,10 +115,10 @@ def filter_matrix(mat):
             uniq_col.append(tuples[1])
 
     for i in uniq_row:
-        mat[i,:] = 0
+        mat[i, :] = 0
 
     for j in uniq_col:
-        mat[:,j] = 0
+        mat[:, j] = 0
 
     return mat
 
@@ -138,7 +138,42 @@ def largest_sum(intlist):
     :return:       the largest sum
     :rtype:         int
     """
+    # numpy the list
+    A = np.array(intlist)
 
+    # make mask for positive numbers only
+    x = [a > 0 for a in A]
 
-    return 10
+    # case if intlist is empty
+    if len(x) == 0:
+        output = 0
 
+    # case if all numbers are negative
+    else if sum(x) == 0:
+        output = max(A)
+
+    # case if all numbers are positive
+    else if sum(x) == len(x):
+        output = sum(A)
+
+    # case where sublists need to be found
+    else:
+        sublists = []
+        templist = []
+        for i, ibool in enumerate(x):
+            if ibool:
+                templist.append(A[i])
+            else:
+                if len(templist) != 0:
+                    sublists.append(templist)
+                templist = []
+        if len(templist) != 0:
+            sublists.append(templist)
+
+        # perform sum on rows
+        sum_list = [sum(a) for a in sublists]
+
+        # output the highest sum out of them
+        output = max(sum_list)
+
+    return output
