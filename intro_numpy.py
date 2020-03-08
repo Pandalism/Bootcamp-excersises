@@ -86,9 +86,9 @@ def cauchy(x, y):
     output = np.zeros((len(x), len(y)))
     for i, xi in enumerate(x):
         for j, yj in enumerate(y):
-            if (xi - yj) == 0:
+            if (x_i - y_j) == 0:
                 raise ValueError
-            output[i, j] = 1 / (xi - yj)
+            output[i, j] = 1 / (x_i - y_j)
 
     return output
 
@@ -112,8 +112,9 @@ def most_similar(x, v_list):
     # imports
     import numpy as np
 
-    # set up cosine similarity lambda
-    cossim = lambda a, b: np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+    # set up cosine similarity function
+    def cossim(a, b):
+        return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
     # set up similarity array
     cossim_results = np.zeros(len(v_list))
@@ -151,9 +152,14 @@ def gradient_descent(x_0, learning_rate, tol):
     """
     import numpy as np
 
-    h = lambda x: (x-1)**2 + np.exp(-(x**2) / 2)
-    f = lambda x: np.log(h(x))
-    g = lambda x: (2 * (x-1) - x * np.exp(-(x**2) / 2)) / h(x)
+    def h(x):
+        return (x-1)**2 + np.exp(-(x**2) / 2)
+
+    def f(x):
+        return np.log(h(x))
+
+    def g(x):
+        return (2 * (x-1) - x * np.exp(-(x**2) / 2)) / h(x)
 
     # initialise tolerance tracker for while loop
     stepsize = tol*2
