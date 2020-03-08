@@ -109,7 +109,7 @@ def most_similar(x, v_list):
     :return: index of element in list that is closest to x in cosine-simv_
     :rtype: int
     """
-    #imports 
+    # imports
     import numpy as np
 
     # set up cosine similarity lambda
@@ -149,5 +149,19 @@ def gradient_descent(x_0, learning_rate, tol):
     :return: the position, the value at that position and the latest update
     :rtype: tuple of three float
     """
+    import numpy as np
 
-    raise NotImplementedError
+    h = lambda x: (x-1)**2 + np.exp(-(x**2) / 2)
+    f = lambda x: np.log(h(x))
+    g = lambda x: (2 * (x-1) - x * np.exp(-(x**2) / 2)) / h(x)
+
+    # initialise tolerance tracker for while loop
+    stepsize = tol*2
+    next_x = x_0
+
+    while stepsize > tol:
+        current_x = next_x
+        next_x = current_x - learning_rate * g(current_x)
+        stepsize = abs(next_x - current_x)
+
+    return (next_x, f(next_x), stepsize)
