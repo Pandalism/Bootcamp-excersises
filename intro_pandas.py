@@ -46,4 +46,3 @@ def subtract_row_mean(df):
     :rtype:   pandas.DataFrame
     """
     return df.apply(lambda x: x-x.mean(), axis=1)
-
