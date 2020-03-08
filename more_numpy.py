@@ -15,8 +15,17 @@ def all_unique_chars(string):
     :return:      true or false if string is made of unique characters
     :rtype:        bool
     """
+    # make string lower case so we will match lower and upper case characters
+    lc_string = string.lower()
 
-    raise NotImplementedError
+    # convert to a list of char
+    full_string = list(lc_string)
+
+    # make a list with only unique values
+    uniq_string = np.unique(full_string)
+
+    # return true if unique and full are the same length
+    return uniq_string == full_string
 
 
 def find_element(sq_mat, val):
@@ -92,5 +101,4 @@ def largest_sum(intlist):
     """
 
     raise NotImplementedError
-
 
