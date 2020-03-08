@@ -31,7 +31,7 @@ def zero_insert(x):
             tempoutput = np.concatenate((tempoutput, insert))
             tempoutput = np.concatenate((tempoutput, x[i+1:i+2]))
         output = tempoutput
-    
+
     # output
     return output
 
@@ -58,7 +58,7 @@ def return_closest(x, val):
 
     # subtract the desired number, find the absolute, then find the index of the min
     mask = np.argmin(abs(x - val))
-    
+
     return x[mask]
 
 
@@ -83,12 +83,12 @@ def cauchy(x, y):
     """
     import numpy as np
 
-    output = np.zeros((len(x),len(y)))
-    for i in range(len(x)):
-        for j in range(len(y)):
-            if (x[i] - y[j] == 0):
+    output = np.zeros((len(x), len(y)))
+    for i, xi in enumerate(x):
+        for j, yj in enumerate(y):
+            if (xi - yj) == 0:
                 raise ValueError
-            output[i, j] = 1 / (x[i] - y[j])
+            output[i, j] = 1 / (xi - yj)
 
     return output
 
@@ -119,9 +119,9 @@ def most_similar(x, v_list):
     cossim_results = np.zeros(len(v_list))
 
     # run through array building similarities
-    for i in range(len(v_list)):
-        cossim_results[i] = cossim(x, v_list[i])
-    
+    for i, item in enumerate(v_list):
+        cossim_results[i] = cossim(x, item)
+
     # return closest to 1
     return np.argmin(abs(cossim_results - 1))
 
