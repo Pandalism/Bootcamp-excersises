@@ -26,7 +26,7 @@ def filter_rep(df):
     """
     import pandas as pd
     out_df = df.drop_duplicates('A')
-    out_df.reset_index(drop=True)
+    out_df = out_df.reset_index(drop=True)
     return out_df
 
 def subtract_row_mean(df):
