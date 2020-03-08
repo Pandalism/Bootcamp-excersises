@@ -45,5 +45,5 @@ def subtract_row_mean(df):
     :return:  a dataframe where each row is centred
     :rtype:   pandas.DataFrame
     """
+    return df.apply(lambda x: x-x.mean(), axis=1)
 
-    raise NotImplementedError
