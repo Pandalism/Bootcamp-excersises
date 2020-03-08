@@ -69,7 +69,7 @@ def find_element(sq_mat, val):
             if sq_mat[i, j] == val:
                 results.add((i, j))
 
-    if len(results) = 0:
+    if len(results) == 0:
         raise ValueError
 
     return results
@@ -90,6 +90,7 @@ def filter_matrix(mat):
     :return:   a matrix where rows and columns of zero entries in mat are zero
     :rtype:    numpy.array
     """
+
 
     raise NotImplementedError
 
