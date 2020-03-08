@@ -158,19 +158,28 @@ def largest_sum(intlist):
 
     # case where sublists need to be found
     else:
+        # set up temp vars
         sum_list = []
         temp_sum_pos = 0
         temp_sum = 0
+
+        # clean A from trailing negative numbers
+        while A[-1] < 0:
+            print(A[-1])
+            A.pop(-1)
+
         for i, ai in enumerate(A):
             # add up numbers as marching down the lane
             temp_sum += ai
             # add only if positive
             if ai > 0:
                 temp_sum_pos += ai
+
             if temp_sum <= 0:
                 sum_list.append(temp_sum_pos)
                 temp_sum = 0
                 temp_sum_pos = 0
+        sum_list.append(temp_sum)
 
         output = max(sum_list)
     return output
