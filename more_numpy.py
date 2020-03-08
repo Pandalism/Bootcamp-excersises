@@ -90,8 +90,18 @@ def filter_matrix(mat):
     :return:   a matrix where rows and columns of zero entries in mat are zero
     :rtype:    numpy.array
     """
-    # find position of zeros 
-    zeros = list(find_element(mat, 0))
+    # define helper function
+    def find_element_list(sq_mat, val):
+        results = []
+        for i in range(sq_mat.shape[0]):
+            for j in range(sq_mat.shape[1]):
+                if sq_mat[i, j] == val:
+                    results.append((i, j))
+
+        return results
+
+    # find position of zeros
+    zeros = list(find_element_list(mat, 0))
 
     # find unique col and rows to convert to 0
 
@@ -103,7 +113,7 @@ def filter_matrix(mat):
             uniq_row.append(tuples[0])
         if tuples[1] not in uniq_col:
             uniq_col.append(tuples[1])
-    
+
     for i in uniq_row:
         mat[i,:] = 0
 
