@@ -84,8 +84,8 @@ def cauchy(x, y):
     import numpy as np
 
     output = np.zeros((len(x), len(y)))
-    for i, xi in enumerate(x):
-        for j, yj in enumerate(y):
+    for i, x_i in enumerate(x):
+        for j, y_j in enumerate(y):
             if (x_i - y_j) == 0:
                 raise ValueError
             output[i, j] = 1 / (x_i - y_j)
