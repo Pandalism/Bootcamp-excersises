@@ -1,6 +1,7 @@
 """Some exercises that can be done with numpy (but you don't have to)"""
 import numpy as np
 
+
 def all_unique_chars(string):
     """
     Write a function to determine if a string is only made of unique
@@ -31,7 +32,7 @@ def all_unique_chars(string):
 
 def find_element(sq_mat, val):
     """
-    Write a function that takes a square matrix of integers and returns a set of all valid 
+    Write a function that takes a square matrix of integers and returns a set of all valid
     positions (i,j) of a value. Each position should be returned as a tuple of two
     integers.
 
@@ -62,8 +63,13 @@ def find_element(sq_mat, val):
     :rtype:        set of tuple of int
     :raise ValueError:
     """
-    
-    raise NotImplementedError
+    results = set()
+    for i in range(sq_mat.shape[0]):
+        for j in range(sq_mat.shape[1]):
+            if sq_mat[i,j] == val:
+                results.add((i,j))
+                
+    return results
 
 
 def filter_matrix(mat):
