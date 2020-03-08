@@ -15,6 +15,8 @@ def all_unique_chars(string):
     :return:      true or false if string is made of unique characters
     :rtype:        bool
     """
+    import numpy as np
+    
     # make string lower case so we will match lower and upper case characters
     lc_string = string.lower()
 
