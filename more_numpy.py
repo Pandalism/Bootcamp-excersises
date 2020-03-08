@@ -149,11 +149,11 @@ def largest_sum(intlist):
         output = 0
 
     # case if all numbers are negative
-    else if sum(x) == 0:
+    elif sum(x) == 0:
         output = max(A)
 
     # case if all numbers are positive
-    else if sum(x) == len(x):
+    elif sum(x) == len(x):
         output = sum(A)
 
     # case where sublists need to be found
