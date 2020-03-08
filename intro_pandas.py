@@ -24,8 +24,9 @@ def filter_rep(df):
     :return: a dataframe where rows have been filtered out
     :rtype: pandas.DataFrame
     """
+    import pandas as pd
 
-    raise NotImplementedError
+    return df.drop_duplicates('A')
 
 
 def subtract_row_mean(df):
