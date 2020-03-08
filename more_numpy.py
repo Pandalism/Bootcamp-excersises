@@ -1,5 +1,5 @@
 """Some exercises that can be done with numpy (but you don't have to)"""
-
+import numpy as np
 
 def all_unique_chars(string):
     """
@@ -15,8 +15,7 @@ def all_unique_chars(string):
     :return:      true or false if string is made of unique characters
     :rtype:        bool
     """
-    import numpy as np
-    
+
     # make string lower case so we will match lower and upper case characters
     lc_string = string.lower()
 
@@ -27,7 +26,7 @@ def all_unique_chars(string):
     uniq_string = np.unique(full_string)
 
     # return true if unique and full are the same length
-    return uniq_string == full_string
+    return len(uniq_string) == len(full_string)
 
 
 def find_element(sq_mat, val):
@@ -63,7 +62,7 @@ def find_element(sq_mat, val):
     :rtype:        set of tuple of int
     :raise ValueError:
     """
-
+    
     raise NotImplementedError
 
 
