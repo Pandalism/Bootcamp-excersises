@@ -25,9 +25,9 @@ def filter_rep(df):
     :rtype: pandas.DataFrame
     """
     import pandas as pd
-
-    return df.drop_duplicates('A')
-
+    out_df = df.drop_duplicates('A')
+    out_df.reset_index(drop=True)
+    return out_df
 
 def subtract_row_mean(df):
     """
