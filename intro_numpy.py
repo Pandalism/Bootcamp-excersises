@@ -115,7 +115,7 @@ def most_similar(x, v_list):
     # set up cosine similarity function
     def cossim(arr_a, array_b):
         return np.dot(arr_a, arr_b) / (np.linalg.norm(arr_a) *
-                                        np.linalg.norm(arr_b))
+                                    np.linalg.norm(arr_b))
 
     # set up similarity array
     cossim_results = np.zeros(len(v_list))
