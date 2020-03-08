@@ -66,9 +66,12 @@ def find_element(sq_mat, val):
     results = set()
     for i in range(sq_mat.shape[0]):
         for j in range(sq_mat.shape[1]):
-            if sq_mat[i,j] == val:
-                results.add((i,j))
-                
+            if sq_mat[i, j] == val:
+                results.add((i, j))
+
+    if len(results) = 0:
+        raise ValueError
+
     return results
 
 
