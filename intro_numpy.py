@@ -83,14 +83,12 @@ def cauchy(x, y):
     """
     import numpy as np
 
-    
-
     output = np.zeros((len(x),len(y)))
     for i in range(len(x)):
         for j in range(len(y)):
             if (x[i] - y[j] == 0):
                 raise ValueError
-            output[i,j] = 1 / (x[i] - y[j])
+            output[i, j] = 1 / (x[i] - y[j])
 
     return output
 
@@ -108,11 +106,24 @@ def most_similar(x, v_list):
     :type x: numpy.array of int/float
     :param v_list: list of vectors
     :type v_list: list of numpy.array
-    :return: index of element in list that is closest to x in cosine-sim
+    :return: index of element in list that is closest to x in cosine-simv_
     :rtype: int
     """
+    #imports 
+    import numpy as np
 
-    raise NotImplementedError
+    # set up cosine similarity lambda
+    cossim = lambda a, b: np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+    # set up similarity array
+    cossim_results = np.zeros(len(v_list))
+
+    # run through array building similarities
+    for i in range(len(v_list)):
+        cossim_results[i] = cossim(x, v_list[i])
+    
+    # return closest to 1
+    return np.argmin(abs(cossim_results - 1))
 
 
 def gradient_descent(x_0, learning_rate, tol):
@@ -140,5 +151,3 @@ def gradient_descent(x_0, learning_rate, tol):
     """
 
     raise NotImplementedError
-
-

@@ -15,7 +15,7 @@ def draw_co2_plot():
     The label of the x axis should be 'Time (decade)'
     The label of the y axis should be 'CO2 concentration (ppm)'
 
-    Your function does not need to return the plot - 
+    Your function does not need to return the plot -
     the final line of the function should be (assuming you have imported pyplot as plt):
     plt.show()
     """
@@ -46,7 +46,7 @@ def draw_equations_plot():
     should range from -4 to 4 (with 50 points) and the y axis should range
     from 0 to 2. The figure should have a size of 8x6 inches.
 
-    NOTE: Make sure you create the figure at the beginning as doing it at the 
+    NOTE: Make sure you create the figure at the beginning as doing it at the
     end will reset any plotting you have done, and again finish with plt.show()
     """
     import matplotlib.pyplot as plt
