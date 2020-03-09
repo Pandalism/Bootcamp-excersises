@@ -138,48 +138,45 @@ def largest_sum(intlist):
     :return:       the largest sum
     :rtype:         int
     """
-    # numpy the list
-    A = np.array(intlist)
+    # define function to reduce down to positive-negative
+    def simplify_list(input_list):
+        """
+        Function that coaleses both positive and negative numbers together
+        """
+        # check if current sign is positive
+        crrnt_sign_plus = (input_list[0] > 0)
+        # make empty vars
+        output_list = []
+        tempVar = 0
+        # loop through list
+        for enumer_i in input_list:
+            # check if sign change
+            if ((enumer_i > 0) ^ crrnt_sign_plus):
+                output_list.append(tempVar)
+                tempVar = enumer_i
+                crrnt_sign_plus = (enumer_i > 0)
+            else:
+                tempVar += enumer_i
+        output_list.append(tempVar)
+        return output_list
 
-    # make mask for positive numbers only
-    x = [a > 0 for a in A]
+    # check if intlist is empty, note breaks with np.array
+    if not intlist:
+        return 0
 
-    # case if intlist is empty
-    if len(x) == 0:
-        output = 0
+    # make bool list of signs of the intlist
+    intlist_positive = [a > 0 for a in intlist]
 
-    # case if all numbers are negative
-    elif sum(x) == 0:
-        output = max(A)
+    # check if all positive
+    if sum(intlist_positive) = len(intlist_positive):
+        return sum(intlist)
 
-    # case if all numbers are positive
-    elif sum(x) == len(x):
-        output = sum(A)
+    # check if all negative
+    elif sum(intlist_positive) == 0:
+        return max(intlist)
 
     # case where sublists need to be found
-    else:
-        # set up temp vars
-        sum_list = []
-        temp_sum_pos = 0
-        temp_sum = 0
 
-        # clean A from trailing negative numbers
-        while A[-1] < 0:
-            print(A[-1])
-            A.pop(-1)
 
-        for i, ai in enumerate(A):
-            # add up numbers as marching down the lane
-            temp_sum += ai
-            # add only if positive
-            if ai > 0:
-                temp_sum_pos += ai
 
-            if temp_sum <= 0:
-                sum_list.append(temp_sum_pos)
-                temp_sum = 0
-                temp_sum_pos = 0
-        sum_list.append(temp_sum)
-
-        output = max(sum_list)
-    return output
+    return 10
