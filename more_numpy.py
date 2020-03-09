@@ -32,9 +32,9 @@ def all_unique_chars(string):
 
 def find_element(sq_mat, val):
     """
-    Write a function that takes a square matrix of integers and returns a set of all valid
-    positions (i,j) of a value. Each position should be returned as a tuple of two
-    integers.
+    Write a function that takes a square matrix of integers and returns a
+    set of all valid positions (i,j) of a value. Each position should be
+    returned as a tuple of two integers.
 
     The matrix is structured in the following way:
     - each row has strictly decreasing values with the column index increasing
@@ -168,7 +168,7 @@ def largest_sum(intlist):
     intlist_positive = [a > 0 for a in intlist]
 
     # check if all positive
-    if sum(intlist_positive) = len(intlist_positive):
+    if sum(intlist_positive) == len(intlist_positive):
         return sum(intlist)
 
     # check if all negative
@@ -176,7 +176,19 @@ def largest_sum(intlist):
         return max(intlist)
 
     # case where sublists need to be found
+    simplified_list = simplify_list(intlist)
 
+    sublists = []
+    running_sum = 0
 
+    for item in simplified_list:
+        # check if new value added makes it less than zero
+        if running_sum + item <= 0:
+            sublists.append(running_sum)
+            running_sum = 0
+        else:
+            running_sum = running_sum + item
 
-    return 10
+    sublists.append(running_sum)
+
+    return max(sublists)
