@@ -69,7 +69,7 @@ def find_element(sq_mat, val):
             if sq_mat[i, j] == val:
                 results.add((i, j))
 
-    if len(results) == 0:
+    if not results:
         raise ValueError
 
     return results
@@ -147,17 +147,17 @@ def largest_sum(intlist):
         crrnt_sign_plus = (input_list[0] > 0)
         # make empty vars
         output_list = []
-        tempVar = 0
+        temp_var = 0
         # loop through list
         for enumer_i in input_list:
             # check if sign change
-            if ((enumer_i > 0) ^ crrnt_sign_plus):
-                output_list.append(tempVar)
-                tempVar = enumer_i
+            if (enumer_i > 0) ^ crrnt_sign_plus:
+                output_list.append(temp_var)
+                temp_var = enumer_i
                 crrnt_sign_plus = (enumer_i > 0)
             else:
-                tempVar += enumer_i
-        output_list.append(tempVar)
+                temp_var += enumer_i
+        output_list.append(temp_var)
         return output_list
 
     # check if intlist is empty, note breaks with np.array
