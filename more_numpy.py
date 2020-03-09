@@ -91,14 +91,7 @@ def filter_matrix(mat):
     :rtype:    numpy.array
     """
     # define helper function
-    def find_element_list(sq_mat, val):
-        results = []
-        for i in range(sq_mat.shape[0]):
-            for j in range(sq_mat.shape[1]):
-                if sq_mat[i, j] == val:
-                    results.append((i, j))
-
-        return results
+    # helper function find_element_list moved to being outside of function
 
     # find position of zeros
     zeros = list(find_element_list(mat, 0))
@@ -192,3 +185,13 @@ def simplify_list(input_list):
             temp_var += enumer_i
     output_list.append(temp_var)
     return output_list
+
+
+def find_element_list(sq_mat, val):
+    results = []
+    for i in range(sq_mat.shape[0]):
+        for j in range(sq_mat.shape[1]):
+            if sq_mat[i, j] == val:
+                results.append((i, j))
+
+    return results
