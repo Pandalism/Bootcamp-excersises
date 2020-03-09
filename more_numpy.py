@@ -138,28 +138,6 @@ def largest_sum(intlist):
     :return:       the largest sum
     :rtype:         int
     """
-    # define function to reduce down to positive-negative
-    def simplify_list(input_list):
-        """
-        Function that coaleses both positive and negative numbers together
-        """
-        # check if current sign is positive
-        crrnt_sign_plus = (input_list[0] > 0)
-        # make empty vars
-        output_list = []
-        temp_var = 0
-        # loop through list
-        for enumer_i in input_list:
-            # check if sign change
-            if (enumer_i > 0) ^ crrnt_sign_plus:
-                output_list.append(temp_var)
-                temp_var = enumer_i
-                crrnt_sign_plus = (enumer_i > 0)
-            else:
-                temp_var += enumer_i
-        output_list.append(temp_var)
-        return output_list
-
     # check if intlist is empty, note breaks with np.array
     if not intlist:
         return 0
@@ -192,3 +170,25 @@ def largest_sum(intlist):
     sublists.append(running_sum)
 
     return max(sublists)
+
+
+def simplify_list(input_list):
+    """
+    Function that coaleses both positive and negative numbers together
+    """
+    # check if current sign is positive
+    crrnt_sign_plus = (input_list[0] > 0)
+    # make empty vars
+    output_list = []
+    temp_var = 0
+    # loop through list
+    for enumer_i in input_list:
+        # check if sign change
+        if (enumer_i > 0) ^ crrnt_sign_plus:
+            output_list.append(temp_var)
+            temp_var = enumer_i
+            crrnt_sign_plus = (enumer_i > 0)
+        else:
+            temp_var += enumer_i
+    output_list.append(temp_var)
+    return output_list
