@@ -84,7 +84,7 @@ def moving_averages(x, k):
     :returns: a numpy array z containing the moving averages.
     """
 
-    return [np.mean(x[n-k:n]) for n in np.arange(k, len(x)+1)]
+    return np.array([np.mean(x[n-k:n]) for n in np.arange(k, len(x)+1)])
 
 def block_matrix(A, B):
     """
