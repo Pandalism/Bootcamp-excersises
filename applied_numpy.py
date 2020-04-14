@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def build_sequences(min_value, max_value, sequence_number):
     """
     Write a function that can generate the following sequences:
@@ -21,7 +22,7 @@ def build_sequences(min_value, max_value, sequence_number):
     :param sequence_number: number of the sequence to return
     :returns: the right sequence as a np.array
     """
-    
+
     # define sequence functions
     def raiseErr(n):
         raise ValueError
@@ -31,7 +32,7 @@ def build_sequences(min_value, max_value, sequence_number):
 
     def seq2(n):
         return (50 - 5 * n)
-        
+
     def seq3(n):
         return (2 ** n)
 
@@ -40,7 +41,6 @@ def build_sequences(min_value, max_value, sequence_number):
         1: seq1,
         2: seq2,
         3: seq3
-        
     }
 
     # define fist 50 values
@@ -56,7 +56,7 @@ def build_sequences(min_value, max_value, sequence_number):
 
     bool_min = prefiltered_list >= min_value
     filtered_list = prefiltered_list[bool_min]
-    
+
     return filtered_list
 
 
@@ -86,6 +86,7 @@ def moving_averages(x, k):
 
     return np.array([np.mean(x[n-k:n]) for n in np.arange(k, len(x)+1)])
 
+
 def block_matrix(A, B):
     """
     Given two numpy matrices A and B of arbitrary dimensions,
@@ -113,7 +114,7 @@ def block_matrix(A, B):
     # fill in A
     for i in range(A.shape[0]):
         for j in range(A.shape[1]):
-            output[i,j] = A[i,j]
+            output[i, j] = A[i, j]
     
     # fill in B
     for i in range(B.shape[0]):
@@ -121,5 +122,4 @@ def block_matrix(A, B):
             output[i + A.shape[0], j + A.shape[1]] = B[i,j]
 
     return output
-
 
