@@ -107,7 +107,19 @@ def block_matrix(A, B):
     :param B: numpy array
     :returns: a numpy array with A and B on the diagonal.
     """
+    # create blank matrix of correct dimensions
+    output = np.zeros((A.shape[0] + B.shape[0], A.shape[1] + B.shape[1]))
 
-    raise NotImplementedError
+    # fill in A
+    for i in range(A.shape[0]):
+        for j in range(A.shape[1]):
+            output[i,j] = A[i,j]
+    
+    # fill in B
+    for i in range(B.shape[0]):
+        for j in range(B.shape[1]):
+            output[i + A.shape[0], j + A.shape[1]] = B[i,j]
+
+    return output
 
 
