@@ -22,6 +22,9 @@ def build_sequences(min_value, max_value, sequence_number):
     import numpy as np
     
     # define sequence functions
+    def raiseErr(n):
+        raise ValueError
+
     def seq1(n):
         return (2 * n + 1)
 
@@ -43,7 +46,7 @@ def build_sequences(min_value, max_value, sequence_number):
     n = np.arange(50)
 
     # swtich to case and execute
-    func = switcher.get(sequence_number, raise ValueError)
+    func = switcher.get(sequence_number, raiseErr)
     prefiltered_list = func(50)
 
     # filter between max and min
