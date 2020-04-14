@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+
 def nan_processor(df, replacement_str):
     """
     Take a DataFrame and return one where all occurrences
@@ -21,8 +24,10 @@ def nan_processor(df, replacement_str):
         replaced by np.nan and subsequently all rows containing np.nan have
         been removed
     """
+    # replace strings with NaN
+    df_w_nan = df.replace(replacement_str, np.nan)
 
-    raise NotImplementedError
+    return df_w_nan.dropna()
 
 
 def feature_cleaner(df, low, high):
