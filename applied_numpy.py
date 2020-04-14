@@ -24,17 +24,17 @@ def build_sequences(min_value, max_value, sequence_number):
     """
 
     # define sequence functions
-    def raiseErr(n):
+    def raise_err(n):
         raise ValueError
 
     def seq1(n):
-        return (2 * n + 1)
+        return 2 * n + 1
 
     def seq2(n):
-        return (50 - 5 * n)
+        return 50 - 5 * n
 
     def seq3(n):
-        return (2 ** n)
+        return 2 ** n
 
     # define switching dictionary
     switcher = {
@@ -47,12 +47,12 @@ def build_sequences(min_value, max_value, sequence_number):
     n = np.arange(50)
 
     # swtich to case and execute
-    func = switcher.get(sequence_number, raiseErr)
+    func = switcher.get(sequence_number, raise_err)
     prefiltered_list = func(n)
 
     # filter between max and min
     bool_max = prefiltered_list <= max_value
-    prefiltered_list =  prefiltered_list[bool_max]
+    prefiltered_list = prefiltered_list[bool_max]
 
     bool_min = prefiltered_list >= min_value
     filtered_list = prefiltered_list[bool_min]
@@ -115,11 +115,10 @@ def block_matrix(A, B):
     for i in range(A.shape[0]):
         for j in range(A.shape[1]):
             output[i, j] = A[i, j]
-    
+
     # fill in B
     for i in range(B.shape[0]):
         for j in range(B.shape[1]):
-            output[i + A.shape[0], j + A.shape[1]] = B[i,j]
+            output[i + A.shape[0], j + A.shape[1]] = B[i, j]
 
     return output
-
