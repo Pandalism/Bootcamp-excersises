@@ -122,3 +122,4 @@ def block_matrix(A, B):
             output[i + A.shape[0], j + A.shape[1]] = B[i, j]
 
     return output
+    
