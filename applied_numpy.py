@@ -19,8 +19,39 @@ def build_sequences(min_value, max_value, sequence_number):
     :param sequence_number: number of the sequence to return
     :returns: the right sequence as a np.array
     """
+    import numpy as np
+    
+    # define sequence functions
+    def seq1(n):
+        return (2 * n + 1)
 
-    raise NotImplementedError
+    def seq2(n):
+        return (50 - 5 * n)
+        
+    def seq3(n):
+        return (2 ** n)
+
+    # define switching dictionary
+    switcher = {
+        1: seq1,
+        2: seq2,
+        3: seq3
+        
+    }
+
+    # define fist 50 values
+    n = np.arange(50)
+
+    # swtich to case and execute
+    func = switcher.get(sequence_number, raise ValueError)
+    prefiltered_list = func(50)
+
+    # filter between max and min
+    bool_max = prefiltered_list <= max_value
+    bool_min = prefiltered_list >= min_value
+    filtered_list = prefiltered_list(bool_max and bool_min)
+    
+    return filtered_list
 
 
 def moving_averages(x, k):
