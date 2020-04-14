@@ -47,12 +47,12 @@ def build_sequences(min_value, max_value, sequence_number):
 
     # swtich to case and execute
     func = switcher.get(sequence_number, raiseErr)
-    prefiltered_list = func(50)
+    prefiltered_list = func(n)
 
     # filter between max and min
     bool_max = prefiltered_list <= max_value
     bool_min = prefiltered_list >= min_value
-    filtered_list = prefiltered_list(bool_max and bool_min)
+    filtered_list = prefiltered_list[bool_max and bool_min]
     
     return filtered_list
 
