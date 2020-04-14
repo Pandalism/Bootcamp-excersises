@@ -1,3 +1,5 @@
+import numpy as np
+
 def build_sequences(min_value, max_value, sequence_number):
     """
     Write a function that can generate the following sequences:
@@ -19,7 +21,6 @@ def build_sequences(min_value, max_value, sequence_number):
     :param sequence_number: number of the sequence to return
     :returns: the right sequence as a np.array
     """
-    import numpy as np
     
     # define sequence functions
     def raiseErr(n):
@@ -83,8 +84,7 @@ def moving_averages(x, k):
     :returns: a numpy array z containing the moving averages.
     """
 
-    raise NotImplementedError
-
+    return [np.mean(x[n-k:n]) for n in np.arange(k, len(x)+1)]
 
 def block_matrix(A, B):
     """
