@@ -1,5 +1,5 @@
 """This exercise contains functions where you need to use pandas to build new columns from existing ones."""
-
+import pandas as pd
 
 def diff_in_days(df):
     """
