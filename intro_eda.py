@@ -141,8 +141,8 @@ def get_feature(df):
     
     for column in class_0_df.columns:
         # calculate R_ for column
-        temp_R_0 = (class_0_df[column].max - class_0_df[column].min) / class_0_df[column].var
-        temp_R_1 = (class_1_df[column].max - class_1_df[column].min) / class_1_df[column].var
+        temp_R_0 = (class_0_df[column].max() - class_0_df[column].min()) / class_0_df[column].var()
+        temp_R_1 = (class_1_df[column].max() - class_1_df[column].min()) / class_1_df[column].var()
 
         # calculate K for column 
         if temp_R_0 > temp_R_1:
