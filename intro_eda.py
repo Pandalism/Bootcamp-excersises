@@ -72,7 +72,7 @@ def feature_cleaner(df, low, high):
     """
     # drop inital nans
     df = df.dropna()
-    
+
     # iterate through columns and
     # mark low and high percentile as nans
     for column in df.columns:
@@ -128,7 +128,35 @@ def get_feature(df):
     :returns:   Name of the column with largest K
     """
 
-    raise NotImplementedError
+    mask_class = df['CLASS'] > 0.1
+
+    # split table to calculate r for each column
+    class_0_df = df[~mask_class].drop('CLASS', axis=1)
+    class_1_df = df[mask_class].drop('CLASS', axis=1)
+
+    # initialise R ratios
+    R_0 = []
+    R_1 = []
+    K = []
+    
+    for column in class_0_df.columns:
+        # calculate R_ for column
+        temp_R_0 = (class_0_df[column].max - class_0_df[column].min) / class_0_df[column].var
+        temp_R_1 = (class_1_df[column].max - class_1_df[column].min) / class_1_df[column].var
+
+        # calculate K for column 
+        if temp_R_0 > temp_R_1:
+            temp_k = temp_R_0 / temp_R_1
+        else:
+            temp_k = temp_R_1 / temp_R_0
+        
+        # append to lists
+        K.append(temp_k)
+        R_0.append(temp_R_0)
+        R_1.append(temp_R_1)
+
+    
+    return class_0_df.columns[np.argmax(K)]
 
 
 def one_hot_encode(label_to_encode, labels):
