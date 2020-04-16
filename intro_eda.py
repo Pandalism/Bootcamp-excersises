@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 def nan_processor(df, replacement_str):
     """
@@ -70,7 +71,13 @@ def feature_cleaner(df, low, high):
                     desired percentile range have been removed
     """
 
-    raise NotImplementedError
+    scaler = StandardScaler()
+    df_scaled = pd.DataFrame(data=scaler.fit_transform(df), columns=df.columns, index=df.index)
+
+    df_scaled[df_scaled >= high] = np.nan
+    df_scaled[df_scaled <= low] = np.nan
+
+    return df_scaled.dropna()
 
 
 def get_feature(df):
