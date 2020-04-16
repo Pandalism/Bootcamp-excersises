@@ -70,6 +70,9 @@ def feature_cleaner(df, low, high):
     :returns:       Scaled DataFrame where elements that are outside of the
                     desired percentile range have been removed
     """
+    # drop inital nans
+    df = df.dropna()
+    
     # iterate through columns and
     # mark low and high percentile as nans
     for column in df.columns:
