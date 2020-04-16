@@ -70,12 +70,17 @@ def feature_cleaner(df, low, high):
     :returns:       Scaled DataFrame where elements that are outside of the
                     desired percentile range have been removed
     """
+    # scale columns
+    # iterate through columns
+    for column in df.columns:
+        curr_mean = df[column].mean()
+        curr_std = df[column].std()
 
-    scaler = StandardScaler()
-    df_scaled = pd.DataFrame(data=scaler.fit_transform(df), columns=df.columns, index=df.index)
+        # apply scaling
+        df[column] = (df[column] - curr_mean)/curr_std
 
-    df_scaled[df_scaled >= high] = np.nan
-    df_scaled[df_scaled <= low] = np.nan
+    df[ df >= high] = np.nan
+    df[ df <= low ] = np.nan
 
     return df_scaled.dropna()
 
