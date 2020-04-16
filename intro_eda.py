@@ -177,6 +177,6 @@ def one_hot_encode(label_to_encode, labels):
     :return: a list of 0s and one 1
     """
 
-    raise NotImplementedError
+    return [int(label_to_encode == label) for label in labels]
 
 
