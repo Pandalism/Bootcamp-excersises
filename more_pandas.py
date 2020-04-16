@@ -35,8 +35,17 @@ def diff_in_days(df):
     :param df: DataFrame with the two columns of timestamps
     :return: new dataframe with differences in days between timestamps
     """
+    # convert to datetime
+    for column in df.columns:
+        df[column] = pd.to_datetime(df[column], unit='s')
 
-    raise NotImplementedError
+    # find absolute time difference
+    a = abs(df['time_1'] - df['time_2'])
+
+    # create df and convert to days int
+    out_df = pd.DataFrame(data=a.dt.days, columns=['difference_days'])
+    
+    return out_df
 
 
 def return_location(df):

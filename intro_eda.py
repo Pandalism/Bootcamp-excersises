@@ -178,5 +178,3 @@ def one_hot_encode(label_to_encode, labels):
     """
 
     return [int(label_to_encode == label) for label in labels]
-
-
