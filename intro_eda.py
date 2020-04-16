@@ -82,7 +82,7 @@ def feature_cleaner(df, low, high):
     df[ df >= high] = np.nan
     df[ df <= low ] = np.nan
 
-    return df_scaled.dropna()
+    return df.dropna()
 
 
 def get_feature(df):
