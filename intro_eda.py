@@ -70,19 +70,27 @@ def feature_cleaner(df, low, high):
     :returns:       Scaled DataFrame where elements that are outside of the
                     desired percentile range have been removed
     """
-    # scale columns
-    # iterate through columns
+    # iterate through columns and
+    # mark low and high percentile as nans
     for column in df.columns:
-        curr_mean = df[column].mean()
-        curr_std = df[column].std()
+        quant_low = df[column].quantile(low)
+        quant_high = df[column].quantile(high)
+
+        df[column][df[column] < quant_low] =np.nan
+        df[column][df[column] > quant_high] =np.nan
+
+    # drop nan rows
+    df_no_outliers = df.dropna()
+
+    # iterate through columns to scale
+    for column in df_no_outliers.columns:
+        curr_mean = df_no_outliers[column].mean()
+        curr_std = df_no_outliers[column].std()
 
         # apply scaling
-        df[column] = (df[column] - curr_mean)/curr_std
+        df_no_outliers[column] = (df_no_outliers[column] - curr_mean)/curr_std
 
-    df[ df >= high] = np.nan
-    df[ df <= low ] = np.nan
-
-    return df.dropna()
+    return df_no_outliers
 
 
 def get_feature(df):
