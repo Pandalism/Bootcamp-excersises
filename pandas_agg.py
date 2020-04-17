@@ -106,6 +106,7 @@ def reshape_temperature_data(measurements):
     outdf = pd.DataFrame(data=data, columns=['location','date','value'])
 
     # drop nans
+    outdf['date'] = outdf['date'].astype('O')
     outdf['value'] = outdf['value'].astype('float64')
     outdf = outdf.replace('nan',np.nan)
     outdf = outdf.dropna()
