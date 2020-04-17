@@ -163,8 +163,9 @@ def compute_events_matrix_count(events):
         for jdx, event in enumerate(event_labels):
             data[idx,jdx] = sum(temp_df['event'] == event)
     
-    outdf = pd.DataFrame(data=data, index = user_id_labels, columns = event_labels)
-    outdf.sort_index()
+    user_id = pd.Index(user_id_labels, name='user_id')
+    outdf = pd.DataFrame(data=data, index = user_id, columns = event_labels)
+    outdf.sort_index(axis = 0)
     outdf.sort_index(axis = 1)
 
     return outdf
