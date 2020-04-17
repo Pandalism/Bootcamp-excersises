@@ -1,4 +1,5 @@
-
+import numpy as np
+import pandas as pd
 
 def nan_processor(df, replacement_str):
     """
@@ -81,6 +82,7 @@ def feature_cleaner(df, low, high):
         df[column][df[column] > quant_high] = np.nan
 
     # drop nan rows
+    df_no_outliers = pd.DataFrame()
     df_no_outliers = df.dropna()
 
     # iterate through columns to scale
