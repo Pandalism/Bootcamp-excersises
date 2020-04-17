@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 
 
 def nan_processor(df, replacement_str):
@@ -135,8 +133,8 @@ def get_feature(df):
     class_1_df = df[mask_class].drop('CLASS', axis=1)
 
     # initialise R ratios
-    r0 = []
-    r1 = []
+    r_0 = []
+    r_1 = []
     k_ratio = []
 
     for column in class_0_df.columns:
@@ -152,8 +150,8 @@ def get_feature(df):
 
         # append to lists
         k_ratio.append(temp_k)
-        r0.append(temp_r0)
-        r1.append(temp_r1)
+        r_0.append(temp_r0)
+        r_1.append(temp_r1)
 
     return class_0_df.columns[np.argmax(k_ratio)]
 
