@@ -151,7 +151,7 @@ def get_feature(df):
             temp_k = temp_r1 / temp_r0
 
         # append to lists
-        k_ratioK.append(temp_k)
+        k_ratio.append(temp_k)
         R_0.append(temp_r0)
         R_1.append(temp_r1)
 
