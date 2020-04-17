@@ -93,9 +93,27 @@ def reshape_temperature_data(measurements):
     for each temperature measurement in a given location. There should be no missing values.
     """
 
-    measurements
+    dates = measurements.columns
+    dates = dates.drop('location')
 
-    raise NotImplementedError
+    # set up initial dataset array
+    data = np.zeros((0,3))
+
+    for index, row in measurements.iterrows():
+        for date in dates:
+            data = np.append(data,[[row.location, date ,row[date]]], axis = 0)
+
+    outdf = pd.DataFrame(data=data, columns=['location','date','value'])
+
+    # drop nans
+    outdf = outdf.replace('nan',np.nan)
+    outdf = outdf.dropna()
+
+    # sort by location and date
+    outdf = outdf.sort_values(['location','value'])
+    outdf = outdf.reset_index(drop=True)
+    
+    return outdf
 
 
 def compute_events_matrix_count(events):
