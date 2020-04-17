@@ -79,8 +79,10 @@ def return_location(df):
     :param df: DataFrame with the locations column
     :return: new DataFrame with the short_name column
     """
+    import json as js
 
-    raise NotImplementedError
+
+    return 0
 
 
 def return_post_codes(df):
