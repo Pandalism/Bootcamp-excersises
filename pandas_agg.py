@@ -39,7 +39,7 @@ def get_prices_for_heaviest_item(inventory):
     inventory = inventory.dropna(subset=['in_stock'])
 
     # create output series
-    out_series = pd.Series()
+    out_series = pd.Series(dtype='float64')
 
     # for loop around categories trying to find max weight
     for category in inventory['category'].unique():
