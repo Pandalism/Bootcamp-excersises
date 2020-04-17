@@ -168,4 +168,7 @@ def compute_events_matrix_count(events):
     outdf = outdf.sort_index(axis = 0)
     outdf = outdf.sort_index(axis = 1)
 
+    if outdf.empty:
+        outdf = pd.Series()
+        
     return outdf
