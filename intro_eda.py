@@ -152,8 +152,8 @@ def get_feature(df):
 
         # append to lists
         k_ratio.append(temp_k)
-        R_0.append(temp_r0)
-        R_1.append(temp_r1)
+        r0.append(temp_r0)
+        r1.append(temp_r1)
 
     return class_0_df.columns[np.argmax(k_ratio)]
 
