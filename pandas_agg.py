@@ -165,7 +165,7 @@ def compute_events_matrix_count(events):
     
     user_id = pd.Index(user_id_labels, name='user_id')
     outdf = pd.DataFrame(data=data, index = user_id, columns = event_labels)
-    outdf.sort_index(axis = 0)
-    outdf.sort_index(axis = 1)
+    outdf = outdf.sort_index(axis = 0)
+    outdf = outdf.sort_index(axis = 1)
 
     return outdf
