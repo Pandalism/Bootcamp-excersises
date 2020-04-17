@@ -33,8 +33,21 @@ def get_prices_for_heaviest_item(inventory):
     :return: a pandas.Series with the category as index and the selected prices in descending order
 
     """
+    # drop rows with no stock
+    inventory['in_stock'] = inventory['in_stock'].replace(False, np.nan)
+    inventory = inventory.dropna(subset=['in_stock'])
 
-    raise NotImplementedError
+    # create output series
+    out_series = pd.Series()
+
+    # for loop around categories trying to find max weight
+    for category in inventory['category'].unique():
+        max_ind = inventory[inventory['category'] == category]['weight'].argmax()
+        max_price = inventory[inventory['category'] == category]['price'].iloc[max_ind]
+
+        out_series[category] = max_price
+
+    return out_series.sort_values(ascending = False)
 
 
 def reshape_temperature_data(measurements):
