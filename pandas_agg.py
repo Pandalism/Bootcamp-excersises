@@ -2,7 +2,8 @@
 This exercise contains functions where you need to use pandas to
 apply various data aggregations and transformations.
 """
-
+import numpy as numpy
+import pandas as pd
 
 def get_prices_for_heaviest_item(inventory):
     """
