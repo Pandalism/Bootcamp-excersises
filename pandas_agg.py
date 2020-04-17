@@ -2,7 +2,7 @@
 This exercise contains functions where you need to use pandas to
 apply various data aggregations and transformations.
 """
-import numpy as numpy
+import numpy as np
 import pandas as pd
 
 def get_prices_for_heaviest_item(inventory):
@@ -92,6 +92,8 @@ def reshape_temperature_data(measurements):
     :return: a pandas.DataFrame containing three columns "location", "date", "value" with a row
     for each temperature measurement in a given location. There should be no missing values.
     """
+
+    measurements
 
     raise NotImplementedError
 
