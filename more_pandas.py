@@ -130,7 +130,17 @@ def return_post_codes(df):
     :param df: a DataFrame with the text column
     :return: new DataFrame with the postcodes column
     """
+    import re
 
-    raise NotImplementedError
+    # initialise new dataframe
+    df_new = pd.DataFrame()
 
+    # define postcode extract function
+    def postcode_extract(s):
+        a = re.findall("[A-Z]+[0-9]+[A-Z]* *[0-9][A-Z][A-Z]",s)
+        return " | ".join(a)
+ 
+    # apply to df
+    df_new['postcodes'] = df['text'].apply(postcode_extract)
 
+    return df_new
