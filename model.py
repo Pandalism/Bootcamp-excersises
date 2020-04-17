@@ -22,7 +22,6 @@ def preprocess(df):
     :type df: pd.DataFrame
     :return: ts, ts_eval
     """
-
     raise NotImplementedError
 
 
@@ -33,7 +32,6 @@ def train(ts):
     :type ts: pd.DataFrame
     :return: a trained model
     """
-
     raise NotImplementedError
 
 
@@ -53,5 +51,4 @@ def predict(model, ts_test):
     :param ts_test: a processed test time serie (on KATE it will be ts_eval)
     :return: y_pred, your predictions
     """
-
     raise NotImplementedError
