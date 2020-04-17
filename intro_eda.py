@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
+
 
 def nan_processor(df, replacement_str):
     """
@@ -79,8 +79,8 @@ def feature_cleaner(df, low, high):
         quant_low = df[column].quantile(low)
         quant_high = df[column].quantile(high)
 
-        df[column][df[column] < quant_low] =np.nan
-        df[column][df[column] > quant_high] =np.nan
+        df[column][df[column] < quant_low] = np.nan
+        df[column][df[column] > quant_high] = np.nan
 
     # drop nan rows
     df_no_outliers = df.dropna()
@@ -135,28 +135,27 @@ def get_feature(df):
     class_1_df = df[mask_class].drop('CLASS', axis=1)
 
     # initialise R ratios
-    R_0 = []
-    R_1 = []
-    K = []
-    
+    r0 = []
+    r1 = []
+    k_ratio = []
+
     for column in class_0_df.columns:
         # calculate R_ for column
-        temp_R_0 = (class_0_df[column].max() - class_0_df[column].min()) / class_0_df[column].var()
-        temp_R_1 = (class_1_df[column].max() - class_1_df[column].min()) / class_1_df[column].var()
+        temp_r0 = (class_0_df[column].max() - class_0_df[column].min()) / class_0_df[column].var()
+        temp_r1 = (class_1_df[column].max() - class_1_df[column].min()) / class_1_df[column].var()
 
-        # calculate K for column 
-        if temp_R_0 > temp_R_1:
-            temp_k = temp_R_0 / temp_R_1
+        # calculate k_ratio for column
+        if temp_r0 > temp_r1:
+            temp_k = temp_r0 / temp_r1
         else:
-            temp_k = temp_R_1 / temp_R_0
-        
-        # append to lists
-        K.append(temp_k)
-        R_0.append(temp_R_0)
-        R_1.append(temp_R_1)
+            temp_k = temp_r1 / temp_r0
 
-    
-    return class_0_df.columns[np.argmax(K)]
+        # append to lists
+        k_ratioK.append(temp_k)
+        R_0.append(temp_r0)
+        R_1.append(temp_r1)
+
+    return class_0_df.columns[np.argmax(k_ratio)]
 
 
 def one_hot_encode(label_to_encode, labels):
