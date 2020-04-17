@@ -101,7 +101,7 @@ def reshape_temperature_data(measurements):
 
     for index, row in measurements.iterrows():
         for date in dates:
-            data = np.append(data,[[row.location, date ,row[date]]], axis = 0)
+            data = np.append(data,[[row.location, date ,float(row[date])]], axis = 0)
 
     outdf = pd.DataFrame(data=data, columns=['location','date','value'])
 
