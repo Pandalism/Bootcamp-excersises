@@ -152,6 +152,19 @@ def compute_events_matrix_count(events):
     :return: a pandas.DataFrame returning the number of occurrence for each event type (columns) for each user (rows).
     """
 
-    raise NotImplementedError
+    event_labels = events['event'].unique()
+    user_id_labels = events['user_id'].unique()
 
+    data = np.zeros((user_id_labels.shape[0], event_labels.shape[0]))
 
+    for idx, user_id_label in enumerate(user_id_labels):
+        temp_df = events[events['user_id'] == user_id_label]
+
+        for jdx, event in enumerate(event_labels):
+            data[i,j] = sum(temp_df['event'] == event)
+    
+    outdf = pd.DataFrame(data=data, index = user_id_labels, columns = event_labels)
+    outdf.sort_index()
+    outdf.sort_index(axis = 1)
+
+    return outdf
