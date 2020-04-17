@@ -81,8 +81,16 @@ def return_location(df):
     """
     import json as js
 
+    # initialise new dataframe
+    df_new = pd.DataFrame()
 
-    return 0
+    # convert column to python key dic
+    df['locations_obj'] = df['locations'].apply(js.loads)
+
+    # pull short name and add as new column to output df
+    df_new['short_name'] = df['locations_obj'].apply(lambda x: x.get('short_name'))
+
+    return df_new
 
 
 def return_post_codes(df):
