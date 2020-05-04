@@ -5,7 +5,7 @@ def preprocess(df):
     The DataFrame contains the time axis and the target column.
 
     It also contains some rows for which the target column is unknown.
-    Those are the observations you will need to predict for KATE 
+    Those are the observations you will need to predict for KATE
     to evaluate the performance of your model.
 
     Here you will need to return the training time serie: ts together
@@ -36,7 +36,7 @@ def train(ts):
 
 
 def predict(model, ts_test):
-    """This functions takes your trained model as well 
+    """This functions takes your trained model as well
     as a processed test time serie and returns predictions.
 
     On KATE, the processed testt time serie will be the ts_eval you built
