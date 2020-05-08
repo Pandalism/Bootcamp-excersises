@@ -34,20 +34,21 @@ def get_prices_for_heaviest_item(inventory):
     :return: a pandas.Series with the category as index and the selected prices in descending order
 
     """
-    # drop rows with no stock
-    inventory['in_stock'] = inventory['in_stock'].replace(False, np.nan)
-    inventory = inventory.dropna(subset=['in_stock'])
+    # check if there is any stock at all
+    if ~inventory['in_stock'].any():
 
-    # create output series
-    out_series = pd.Series(dtype='float64')
+        # if not return empty series
+        return pd.Series(dtype='float64')
 
-    # for loop around categories trying to find max weight
-    for category in inventory['category'].unique():
-        max_ind = inventory[inventory['category'] == category]['weight'].argmax()
-        max_price = inventory[inventory['category'] == category]['price'].iloc[max_ind]
+    # continue with logic, assign in stock inventory to new df
+    in_stock_inventory = inventory[inventory['in_stock']]
 
-        out_series[category] = max_price
+    # group by category and pull the row price 
+    out_series = in_stock_inventory.groupby(['category']).apply(lambda row: row['price'].iloc[row['weight'].argmax()])
 
+    # remove headings
+    out_series = out_series.rename_axis(None)
+    
     return out_series.sort_values(ascending = False)
 
 
