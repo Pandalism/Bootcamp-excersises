@@ -46,8 +46,11 @@ def get_cumulated_variance(df, scale):
     # make columns for output
     columns = [ ("PC" + str(ind)) for ind in range(len(df.columns))]
 
-    # output df
-    return pd.DataFrame(data = variance_data, columns = columns)
+    # make output df and insert data 
+    output = pd.DataFrame(columns = columns)
+    output.loc[0] = variance_data
+
+    return output
 
 
 def get_coordinates_of_first_two(df, scale):
