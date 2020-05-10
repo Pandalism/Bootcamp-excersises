@@ -98,11 +98,10 @@ def get_coordinates_of_first_two(df, scale):
     pca_obj.fit(df)
 
     # make names for rows (PC1, PC2, etc)
-    rows = [('PC' + str(ind + 1)) for ind in range(len(df.columns))]
+    rows = ['PC1', 'PC2']
 
     # output principle components of PCA as a df
-    return pd.DataFrame(data = rows)
-    # return pd.DataFrame(data = pca_obj.components_, columns = df.columns, index = rows)
+    return pd.DataFrame(data = pca_obj.components_[0:2,:], columns = df.columns, index = rows)
 
 
 def get_most_important_two(df, scale):
