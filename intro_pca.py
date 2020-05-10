@@ -287,8 +287,7 @@ def find_outliers_pca(df, n, scale):
     # find std and create mask
     std = df_pca.std()
     mask = abs(df_pca) > (n * std)
-    mask
-
+    
     # return df with mask applied
     return df[mask.PC1]
-    
+
