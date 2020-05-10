@@ -82,8 +82,27 @@ def get_coordinates_of_first_two(df, scale):
     :return: a new DataFrame with coordinates of PC1 and PC2
     """
 
-    raise NotImplementedError
+    import pandas as pd
+    import numpy as np
+    from sklearn.decomposition import PCA
+    from sklearn.preprocessing import StandardScaler
+    
+    # check if data needs scaling
+    if scale:
+        std_scale = StandardScaler()
+        scaled_data = std_scale.fit_transform(df)
+        df = pd.DataFrame(data = scaled_data, columns = df.columns)
 
+    # fit pca 
+    pca_obj = PCA()
+    pca_obj.fit(df)
+
+    # make names for rows (PC1, PC2, etc)
+    rows = [('PC' + str(ind + 1)) for ind in range(len(df.columns))]
+
+    # output principle components of PCA as a df
+    return pd.DataFrame(data = pca_obj.components_, columns = df.columns, index = rows)
+    
 
 def get_most_important_two(df, scale):
     """Apply PCA on a given DataFrame df and use it to determine the
