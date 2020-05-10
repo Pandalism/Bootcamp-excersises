@@ -129,12 +129,6 @@ def get_most_important_two(df, scale):
     :param scale: boolean, whether to scale or not
     :return: names of the two most important features as a tuple
     """
-
-    import pandas as pd
-    import numpy as np
-    from sklearn.decomposition import PCA
-    from sklearn.preprocessing import StandardScaler
-    
     # check if data needs scaling
     if scale:
         std_scale = StandardScaler()
@@ -147,11 +141,11 @@ def get_most_important_two(df, scale):
 
     # prepare to iterate and create output data
     output = []
-    components = df.columns
+    components = list(df.columns)
     pc1_components = list(abs(pca_obj.components_[0]))
 
     # iterate and find most important components
-    for i in range(2):
+    for dummy in range(2):
         temp = np.argmax(pc1_components)
         output.append(components.pop(temp))
         del pc1_components[temp]
