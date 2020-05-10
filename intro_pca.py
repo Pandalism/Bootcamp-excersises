@@ -4,6 +4,10 @@ All of them take at least a dataframe df as argument. To test your functions
 locally, we recommend using the wine dataset that you can load from sklearn by
 importing sklearn.datasets.load_wine"""
 
+import pandas as pd
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
 def get_cumulated_variance(df, scale):
     """Apply PCA on a DataFrame and return a new DataFrame containing
@@ -25,10 +29,6 @@ def get_cumulated_variance(df, scale):
     :param scale: boolean, whether to scale or not
     :return: a new DataFrame with cumulated variance in percent
     """
-    import pandas as pd
-    import numpy as np
-    from sklearn.decomposition import PCA
-    from sklearn.preprocessing import StandardScaler
     
     # check if data needs scaling
     if scale:
@@ -81,11 +81,6 @@ def get_coordinates_of_first_two(df, scale):
     :param scale: boolean, whether to scale or not
     :return: a new DataFrame with coordinates of PC1 and PC2
     """
-
-    import pandas as pd
-    import numpy as np
-    from sklearn.decomposition import PCA
-    from sklearn.preprocessing import StandardScaler
     
     # check if data needs scaling
     if scale:
@@ -135,7 +130,33 @@ def get_most_important_two(df, scale):
     :return: names of the two most important features as a tuple
     """
 
-    raise NotImplementedError
+    import pandas as pd
+    import numpy as np
+    from sklearn.decomposition import PCA
+    from sklearn.preprocessing import StandardScaler
+    
+    # check if data needs scaling
+    if scale:
+        std_scale = StandardScaler()
+        scaled_data = std_scale.fit_transform(df)
+        df = pd.DataFrame(data = scaled_data, columns = df.columns)
+
+    # get pca
+    pca_obj = PCA()
+    pca_obj.fit(df)
+
+    # prepare to iterate and create output data
+    output = []
+    components = df.columns
+    pc1_components = list(abs(pca_obj.components_[0]))
+
+    # iterate and find most important components
+    for i in range(2):
+        temp = argmax(pc1_components)
+        output.append(components.pop(temp))
+        del pc1_components[temp]
+    
+    return output
 
 
 def distance_in_n_dimensions(df, point_a, point_b, n, scale):
