@@ -150,7 +150,7 @@ def get_most_important_two(df, scale):
         output.append(components.pop(temp))
         del pc1_components[temp]
     
-    return output
+    return (output[0], output[1])
 
 
 def distance_in_n_dimensions(df, point_a, point_b, n, scale):
@@ -196,7 +196,18 @@ def distance_in_n_dimensions(df, point_a, point_b, n, scale):
     :return: distance between points in the subspace
     """
 
-    raise NotImplementedError
+    # check if data needs scaling
+    if scale:
+        std_scale = StandardScaler()
+        scaled_data = std_scale.fit_transform(df)
+        df = pd.DataFrame(data = scaled_data, columns = df.columns)
+
+    # get pca
+    pca_obj = PCA()
+    pca_obj.fit(df)
+
+
+
 
 
 def find_outliers_pca(df, n, scale):
