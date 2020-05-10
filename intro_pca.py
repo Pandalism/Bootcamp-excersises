@@ -101,8 +101,9 @@ def get_coordinates_of_first_two(df, scale):
     rows = [('PC' + str(ind + 1)) for ind in range(len(df.columns))]
 
     # output principle components of PCA as a df
-    return pd.DataFrame(data = pca_obj.components_, columns = df.columns, index = rows)
-    
+    return rows
+    # return pd.DataFrame(data = pca_obj.components_, columns = df.columns, index = rows)
+
 
 def get_most_important_two(df, scale):
     """Apply PCA on a given DataFrame df and use it to determine the
