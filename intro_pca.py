@@ -271,6 +271,7 @@ def find_outliers_pca(df, n, scale):
     :return: pandas DataFrame containing outliers only
     """
     # check if needs scaling, and do so
+    orig_df = df # save df for output
     if scale:
         std_scale = StandardScaler()
         scaled_data = std_scale.fit_transform(df)
@@ -289,5 +290,5 @@ def find_outliers_pca(df, n, scale):
     mask = abs(df_pca) > (n * std)
     
     # return df with mask applied
-    return df[mask.PC1]
+    return orig_df[mask.PC1]
 
