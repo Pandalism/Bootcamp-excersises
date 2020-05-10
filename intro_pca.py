@@ -152,7 +152,7 @@ def get_most_important_two(df, scale):
 
     # iterate and find most important components
     for i in range(2):
-        temp = argmax(pc1_components)
+        temp = np.argmax(pc1_components)
         output.append(components.pop(temp))
         del pc1_components[temp]
     
