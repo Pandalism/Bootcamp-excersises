@@ -101,7 +101,7 @@ def get_coordinates_of_first_two(df, scale):
     rows = [('PC' + str(ind + 1)) for ind in range(len(df.columns))]
 
     # output principle components of PCA as a df
-    return rows
+    return pd.DataFrame(data = rows)
     # return pd.DataFrame(data = pca_obj.components_, columns = df.columns, index = rows)
 
 
