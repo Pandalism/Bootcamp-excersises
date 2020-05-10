@@ -270,6 +270,25 @@ def find_outliers_pca(df, n, scale):
     :param scale: whether to scale data or not
     :return: pandas DataFrame containing outliers only
     """
+    # check if needs scaling, and do so
+    if scale:
+        std_scale = StandardScaler()
+        scaled_data = std_scale.fit_transform(df)
+        df = pd.DataFrame(data = scaled_data, columns = df.columns)
 
-    raise NotImplementedError
+    # apply PCA for the first component and pull data
+    pca_obj = PCA(n_components = 1)
+    data = pca_obj.fit_transform(df)
 
+    # place into dataframe to use pandas.std()
+    df_pca = pd.DataFrame(data = data, columns = ['PC1'])
+    df_pca.head()
+
+    # find std and create mask
+    std = df_pca.std()
+    mask = abs(df_pca) > (n * std)
+    mask
+
+    # return df with mask applied
+    return df[mask.PC1]
+    
