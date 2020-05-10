@@ -25,8 +25,29 @@ def get_cumulated_variance(df, scale):
     :param scale: boolean, whether to scale or not
     :return: a new DataFrame with cumulated variance in percent
     """
+    import pandas as pd
+    import numpy as np
+    from sklearn.decomposition import PCA
+    from sklearn.preprocessing import StandardScaler
+    
+    # check if data needs scaling
+    if scale:
+        std_scale = StandardScaler()
+        scaled_data = std_scale.fit_transform(df)
+        df = pd.DataFrame(data = scaled_data. columns = df.columns)
 
-    raise NotImplementedError
+    # fit pca 
+    pca_obj = PCA()
+    pca_obj.fit(df)
+    
+    # pull explained variance and scaled it, then get percentage and cumulative sum.
+    variance_data = np.cumsum(pca_obj.explained_variance_ / sum(pca_obj.explained_variance_)) * 100
+
+    # make columns for output
+    columns = [ ("PC" + str(ind) for ind in range(len(df.columns)))]
+
+    # output df
+    return pd.DataFrame(data = variance_data, columns = columns)
 
 
 def get_coordinates_of_first_two(df, scale):
