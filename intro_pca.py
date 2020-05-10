@@ -203,11 +203,17 @@ def distance_in_n_dimensions(df, point_a, point_b, n, scale):
         df = pd.DataFrame(data = scaled_data, columns = df.columns)
 
     # get pca
-    pca_obj = PCA()
+    pca_obj = PCA(n_components = n)
     pca_obj.fit(df)
 
+    # apply components to point a and b
+    pca_a = pca_obj.components_ @ point_a
+    pca_b = pca_obj.components_ @ point_b
 
+    # calculate euclidian distance
+    dist = np.linalg.norm(pca_a - pca_b, 2)
 
+    return dist
 
 
 def find_outliers_pca(df, n, scale):
