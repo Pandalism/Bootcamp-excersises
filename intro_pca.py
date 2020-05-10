@@ -34,7 +34,7 @@ def get_cumulated_variance(df, scale):
     if scale:
         std_scale = StandardScaler()
         scaled_data = std_scale.fit_transform(df)
-        df = pd.DataFrame(data = scaled_data. columns = df.columns)
+        df = pd.DataFrame(data = scaled_data, columns = df.columns)
 
     # fit pca 
     pca_obj = PCA()
