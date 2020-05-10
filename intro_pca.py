@@ -274,14 +274,14 @@ def find_outliers_pca(df, n, scale):
     if scale:
         std_scale = StandardScaler()
         scaled_data = std_scale.fit_transform(df)
-        df = pd.DataFrame(data = scaled_data, columns = df.columns)
+        df = pd.DataFrame(data = scaled_data, columns = df.columns, index = df.index)
 
     # apply PCA for the first component and pull data
     pca_obj = PCA(n_components = 1)
     data = pca_obj.fit_transform(df)
 
     # place into dataframe to use pandas.std()
-    df_pca = pd.DataFrame(data = data, columns = ['PC1'])
+    df_pca = pd.DataFrame(data = data, columns = ['PC1'],  index = df.index)
     df_pca.head()
 
     # find std and create mask
