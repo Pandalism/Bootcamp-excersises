@@ -44,7 +44,7 @@ def get_cumulated_variance(df, scale):
     variance_data = np.cumsum(pca_obj.explained_variance_ / sum(pca_obj.explained_variance_)) * 100
 
     # make columns for output
-    columns = [ ("PC" + str(ind) for ind in range(len(df.columns)))]
+    columns = [ ("PC" + str(ind)) for ind in range(len(df.columns))]
 
     # output df
     return pd.DataFrame(data = variance_data, columns = columns)
