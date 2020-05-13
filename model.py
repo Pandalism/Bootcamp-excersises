@@ -35,6 +35,7 @@ def preprocess(df):
     # Pull y from X
     y = pd.DataFrame(X['state'])
     X = X.drop('state', axis = 1)
+    X_eval = X_eval.drop('state', axis = 1)
 
     return X, y, X_eval
     
