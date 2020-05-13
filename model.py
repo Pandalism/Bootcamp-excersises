@@ -1,3 +1,6 @@
+import pandas as pd
+import numpy as np
+
 def preprocess(df):
     """This function takes a dataframe and preprocesses it so it is
     ready for the training stage.
@@ -24,7 +27,17 @@ def preprocess(df):
     :type df: pd.DataFrame
     :return: X, y, X_eval
     """
-    raise NotImplementedError
+
+    # Seperate X_eval and X from data
+    X_eval = df[df['evaluation_set']]
+    X = df[~df['evaluation_set']]
+
+    # Pull y from X
+    y = pd.DataFrame(X['state'])
+    X = X.drop('state', axis = 1)
+
+    return X, y, X_eval
+    
 
 
 def train(X, y):
