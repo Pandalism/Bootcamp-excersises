@@ -94,7 +94,12 @@ def train(X, y):
     :type y: pd.DataFrame with one column or pd.Series
     :return: a trained model
     """
-    raise NotImplementedError
+    from sklearn.tree import DecisionTreeClassifier
+    # Create an instance where max_depth equals 3 and fit it to the training data
+    model = DecisionTreeClassifier(max_depth=3)
+
+    return model.fit(X,y)
+    
 
 
 def predict(model, X_test):
@@ -113,4 +118,5 @@ def predict(model, X_test):
     :param X_test: a processed test set (on KATE it will be X_eval)
     :return: y_pred, your predictions
     """
-    raise NotImplementedError
+    
+    return model.predict(X_test)
