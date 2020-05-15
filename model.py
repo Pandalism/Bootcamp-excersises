@@ -27,10 +27,54 @@ def preprocess(df):
     :type df: pd.DataFrame
     :return: X, y, X_eval
     """
+    import json
+
+    # drop unneeded features
+    list_to_keep = ['goal',
+                    'static_usd_rate',
+                    'deadline',
+                    'created_at',
+                    'launched_at',
+                    'state',
+                    'evaluation_set']
+
+    # list of items to further investigate to achieve 
+    list_to_investigate = ['category', 'currency', 'profile', 'creator']
+
+    selected_df = df[list_to_keep]
+
+
+    # Apply conversions
+    # goal currency application
+    selected_df['goal_usd'] = selected_df['goal'] * selected_df['static_usd_rate']
+    selected_df = selected_df.drop(['goal', 'static_usd_rate'], axis = 1)
+
+    # set dates to relative one another
+    # hypothesis here is longer deadlines likelier to succeed
+    # longer setup time (launch after created) more effort put into crowdfund
+    selected_df['launch_to_deadline'] = selected_df['deadline'] - selected_df['launched_at']
+    selected_df['created_to_launch'] =  selected_df['launched'] - selected_df['launched_at']
+    selected_df = selected_df.drop(['goal', 'static_usd_rate'], axis = 1)
+
+    # df = df.drop(list_to_drop, axis = 1)
+
+    # # apply conversions
+    # # create one hot encoding function
+    # def custom_one_hot_encode(df, column, categories):
+    #     for category in categories:
+    #         df[f'{column}_{category}'] = (df[column] == category) * 1
+    #     del df[column]
+
+    # # one hot encode for currencies
+    # currencies = 
+
+
+    # # parse json and convert categories to major categories
+    # df['category'] = df['category'].apply(lambda row: json.loads(row)['slug'].split('/')[0])
 
     # Seperate X_eval and X from data
-    X_eval = df[df['evaluation_set']]
-    X = df[~df['evaluation_set']]
+    X_eval = selected_df[selected_df['evaluation_set']]
+    X = selected_df[~selected_df['evaluation_set']]
 
     # Pull y from X
     y = pd.DataFrame(X['state'])
