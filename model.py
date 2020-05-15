@@ -53,8 +53,8 @@ def preprocess(df):
     # hypothesis here is longer deadlines likelier to succeed
     # longer setup time (launch after created) more effort put into crowdfund
     selected_df['launch_to_deadline'] = selected_df['deadline'] - selected_df['launched_at']
-    selected_df['created_to_launch'] =  selected_df['launched'] - selected_df['launched_at']
-    selected_df = selected_df.drop(['goal', 'static_usd_rate'], axis = 1)
+    selected_df['created_to_launch'] =  selected_df['launched_at'] - selected_df['created_at']
+    selected_df = selected_df.drop(['launched_at', 'created_at'], axis = 1)
 
     # df = df.drop(list_to_drop, axis = 1)
 
