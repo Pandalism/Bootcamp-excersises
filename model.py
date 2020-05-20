@@ -55,11 +55,11 @@ def preprocess(df):
     # longer setup time (launch after created) more effort put into crowdfund
     selected_df['launch_to_deadline'] = selected_df['deadline'] - selected_df['launched_at']
     selected_df['created_to_launch'] = selected_df['launched_at'] - selected_df['created_at']
-    selected_df = selected_df.drop(['launched_at', 'created_at'], axis = 1)
+    selected_df = selected_df.drop(['launched_at', 'created_at'], axis=1)
 
     # Parse profile json string
     # and check if url is attached
-    selected_df['profile_url_attached'] = selected_df['profile'].apply(lambda row: not json.loads(row).get('link_url') )
+    selected_df['profile_url_attached'] = selected_df['profile'].apply(lambda row: not json.loads(row).get('link_url'))
     selected_df = selected_df.drop(['profile'], axis=1)
 
     # Parse categories, convert to parent category strings
@@ -79,6 +79,7 @@ def preprocess(df):
                       'journalism',
                       'dance',
                       'technology']
+                      
     # define OHE
     def custom_one_hot_encode(df, column, categories):
         for category in categories:
@@ -96,8 +97,8 @@ def preprocess(df):
 
     # Pull y from X
     y = pd.DataFrame(X['state'])
-    X = X.drop('state', axis = 1)
-    X_eval = X_eval.drop('state', axis = 1)
+    X = X.drop('state', axis=1)
+    X_eval = X_eval.drop('state', axis=1)
 
     return X, y, X_eval
 
