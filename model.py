@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 
 def preprocess(df):
@@ -55,31 +54,31 @@ def preprocess(df):
     # hypothesis here is longer deadlines likelier to succeed
     # longer setup time (launch after created) more effort put into crowdfund
     selected_df['launch_to_deadline'] = selected_df['deadline'] - selected_df['launched_at']
-    selected_df['created_to_launch'] =  selected_df['launched_at'] - selected_df['created_at']
+    selected_df['created_to_launch'] = selected_df['launched_at'] - selected_df['created_at']
     selected_df = selected_df.drop(['launched_at', 'created_at'], axis = 1)
 
     # Parse profile json string
     # and check if url is attached
-    selected_df['profile_url_attached'] = selected_df['profile'].apply(lambda row: not(json.loads(row).get('link_url')))
-    selected_df = selected_df.drop(['profile'], axis = 1)
+    selected_df['profile_url_attached'] = selected_df['profile'].apply(lambda row: not json.loads(row).get('link_url') )
+    selected_df = selected_df.drop(['profile'], axis=1)
 
     # Parse categories, convert to parent category strings
     df['category'] = df['category'].apply(lambda row: json.loads(row).get('slug').split('/')[0])
     # Create list to OHE
     ohe_categories = ['music',
-                    'film & video',
-                    'publishing',
-                    'games',
-                    'art',
-                    'food',
-                    'fashion',
-                    'design',
-                    'comics',
-                    'photography',
-                    'crafts',
-                    'journalism',
-                    'dance',
-                    'technology']
+                      'film & video',
+                      'publishing',
+                      'games',
+                      'art',
+                      'food',
+                      'fashion',
+                      'design',
+                      'comics',
+                      'photography',
+                      'crafts',
+                      'journalism',
+                      'dance',
+                      'technology']
     # define OHE
     def custom_one_hot_encode(df, column, categories):
         for category in categories:
@@ -101,7 +100,6 @@ def preprocess(df):
     X_eval = X_eval.drop('state', axis = 1)
 
     return X, y, X_eval
-    
 
 
 def train(X, y):
@@ -115,14 +113,13 @@ def train(X, y):
     """
     from sklearn.tree import DecisionTreeClassifier
     # Create an instance where max_depth equals 3 and fit it to the training data
-    model = DecisionTreeClassifier(criterion= 'entropy', max_depth= 9, max_features=None)
+    model = DecisionTreeClassifier(criterion='entropy', max_depth=9, max_features=None)
 
-    return model.fit(X,y)
-    
+    return model.fit(X, y)
 
 
 def predict(model, X_test):
-    """This functions takes your trained model as well 
+    """This functions takes your trained model as well
     as a processed test dataset and returns predictions.
 
     On KATE, the processed test dataset will be the X_eval you built
@@ -137,5 +134,5 @@ def predict(model, X_test):
     :param X_test: a processed test set (on KATE it will be X_eval)
     :return: y_pred, your predictions
     """
-    
+
     return model.predict(X_test)
