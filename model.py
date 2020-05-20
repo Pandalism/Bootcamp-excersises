@@ -48,7 +48,7 @@ def preprocess(df):
     # Apply conversions
     # goal currency application
     selected_df['goal_usd'] = selected_df['goal'] * selected_df['static_usd_rate']
-    selected_df = selected_df.drop(['goal', 'static_usd_rate'], axis = 1)
+    selected_df = selected_df.drop(['goal', 'static_usd_rate'], axis=1)
 
     # set dates to relative one another
     # hypothesis here is longer deadlines likelier to succeed
@@ -79,7 +79,7 @@ def preprocess(df):
                       'journalism',
                       'dance',
                       'technology']
-                      
+
     # define OHE
     def custom_one_hot_encode(df, column, categories):
         for category in categories:
