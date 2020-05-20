@@ -114,7 +114,7 @@ def train(X, y):
     """
     from sklearn.tree import DecisionTreeClassifier
     # Create an instance where max_depth equals 3 and fit it to the training data
-    model = DecisionTreeClassifier(max_depth=3)
+    model = DecisionTreeClassifier(criterion= 'entropy', max_depth= 9, max_features=None)
 
     return model.fit(X,y)
     
