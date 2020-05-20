@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 def preprocess(df):
     """This function takes a dataframe and preprocesses it so it is
     ready for the training stage.
@@ -8,8 +9,8 @@ def preprocess(df):
     The DataFrame contains columns used for training (features)
     as well as the target column.
 
-    It also contains some rows for which the target column is unknown. 
-    Those are the observations you will need to predict for KATE 
+    It also contains some rows for which the target column is unknown.
+    Those are the observations you will need to predict for KATE
     to evaluate the performance of your model.
 
     Here you will need to return the training set: X and y together
@@ -33,17 +34,17 @@ def preprocess(df):
     list_to_keep = ['goal',
                     'static_usd_rate',
                     'deadline',
-                    'created_at','launched_at',
+                    'created_at',
+                    'launched_at',
                     'state',
                     'evaluation_set',
                     'profile',
                     'category']
 
-    # list of items to further investigate to achieve 
-    list_to_investigate = ['currency']
+    # list of items to further investigate to achieve
+    # list_to_investigate = ['currency']
 
     selected_df = df[list_to_keep]
-
 
     # Apply conversions
     # goal currency application
