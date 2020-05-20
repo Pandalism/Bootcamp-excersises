@@ -33,13 +33,14 @@ def preprocess(df):
     list_to_keep = ['goal',
                     'static_usd_rate',
                     'deadline',
-                    'created_at',
-                    'launched_at',
+                    'created_at','launched_at',
                     'state',
-                    'evaluation_set']
+                    'evaluation_set',
+                    'profile',
+                    'category']
 
     # list of items to further investigate to achieve 
-    list_to_investigate = ['category', 'currency', 'profile', 'creator']
+    list_to_investigate = ['currency']
 
     selected_df = df[list_to_keep]
 
@@ -56,18 +57,35 @@ def preprocess(df):
     selected_df['created_to_launch'] =  selected_df['launched_at'] - selected_df['created_at']
     selected_df = selected_df.drop(['launched_at', 'created_at'], axis = 1)
 
-    # df = df.drop(list_to_drop, axis = 1)
+    # Parse profile json string
+    # and check if url is attached
+    selected_df['profile_url_attached'] = selected_df['profile'].apply(lambda row: not(json.loads(row).get('link_url')))
+    selected_df = selected_df.drop(['profile'], axis = 1)
 
-    # # apply conversions
-    # # create one hot encoding function
-    # def custom_one_hot_encode(df, column, categories):
-    #     for category in categories:
-    #         df[f'{column}_{category}'] = (df[column] == category) * 1
-    #     del df[column]
-
-    # # one hot encode for currencies
-    # currencies = 
-
+    # Parse categories, convert to parent category strings
+    df['category'] = df['category'].apply(lambda row: json.loads(row).get('slug').split('/')[0])
+    # Create list to OHE
+    ohe_categories = ['music',
+                    'film & video',
+                    'publishing',
+                    'games',
+                    'art',
+                    'food',
+                    'fashion',
+                    'design',
+                    'comics',
+                    'photography',
+                    'crafts',
+                    'journalism',
+                    'dance',
+                    'technology']
+    # define OHE
+    def custom_one_hot_encode(df, column, categories):
+        for category in categories:
+            df[f'{column}_{category}'] = (df[column] == category) * 1
+        del df[column]
+    # apply OHE
+    custom_one_hot_encode(selected_df, 'category', ohe_categories)
 
     # # parse json and convert categories to major categories
     # df['category'] = df['category'].apply(lambda row: json.loads(row)['slug'].split('/')[0])
