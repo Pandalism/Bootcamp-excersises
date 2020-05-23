@@ -22,7 +22,13 @@ def preprocess(df):
     :type df: pd.DataFrame
     :return: ts, ts_eval
     """
-    raise NotImplementedError
+
+    ts_eval = df.loc[df.evaluation_set]
+    ts = df.loc[~df.evaluation_set]
+    ts.drop(['evaluation_set'], axis=1, inplace=True)
+    ts_eval.drop(['evaluation_set'], axis=1, inplace=True)
+    
+    return ts, ts_eval
 
 
 def train(ts):
