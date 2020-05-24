@@ -45,7 +45,11 @@ def train(ts):
     :type ts: pd.DataFrame
     :return: a trained model
     """
-    raise NotImplementedError
+    from statsmodels.api import tsa
+
+    model = tsa.AR(ts).fit()
+
+    return model
 
 
 def predict(model, ts_test):
@@ -64,4 +68,5 @@ def predict(model, ts_test):
     :param ts_test: a processed test time serie (on KATE it will be ts_eval)
     :return: y_pred, your predictions
     """
-    raise NotImplementedError
+    y_pred = model.predict(start=ts_test.index[0], end= ts_test.index[-1])
+    return y_pred
