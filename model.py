@@ -51,7 +51,7 @@ def train(ts):
 
     ts_a = ts.reset_index().rename(columns={'day': 'ds', 'consumption': 'y'})
 
-    model = Prophet( growth='linear',  weekly_seasonality=5, yearly_seasonality=5)
+    model = Prophet(growth='linear',  weekly_seasonality=5, yearly_seasonality=5)
     model.fit(ts_a)
 
     return model
@@ -76,10 +76,10 @@ def predict(model, ts_test):
 
     ts_eval_a = ts_test.reset_index().rename(columns={'day': 'ds', 'consumption': 'y'})
 
-    model_predictions = model.predict( ts_eval_a )
-    y_predict_p = model_predictions[['ds','yhat']] 
+    model_predictions = model.predict(ts_eval_a)
+    y_predict_p = model_predictions[['ds', 'yhat']]
     y_predict_p['day'] = y_predict_p['ds']
     y_predict_p.set_index(pd.to_datetime(y_predict_p.day), inplace=True)
-    y_predict_p.drop(['day','ds'],axis=1, inplace=True)
+    y_predict_p.drop(['day', 'ds'], axis=1, inplace=True)
 
     return y_predict_p['yhat']
