@@ -23,10 +23,10 @@ def preprocess(df):
     :return: ts, ts_eval
     """
     import pandas as pd
-    
+
     # reindex to day
     df.set_index(pd.to_datetime(df.day), inplace=True)
-    df.drop(['day'],axis=1, inplace=True)
+    df.drop(['day'], axis=1, inplace=True)
 
     # split into train and eval
     ts_eval = df.loc[df.evaluation_set]
@@ -35,7 +35,7 @@ def preprocess(df):
     # drop eval column
     ts.drop(['evaluation_set'], axis=1, inplace=True)
     ts_eval.drop(['evaluation_set'], axis=1, inplace=True)
-    
+
     return ts, ts_eval
 
 
@@ -69,5 +69,5 @@ def predict(model, ts_test):
     :param ts_test: a processed test time serie (on KATE it will be ts_eval)
     :return: y_pred, your predictions
     """
-    y_pred = model.predict(start=ts_test.index[0], end= ts_test.index[-1])
+    y_pred = model.predict(start=ts_test.index[0], end=ts_test.index[-1])
     return y_pred
