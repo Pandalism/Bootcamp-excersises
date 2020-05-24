@@ -23,8 +23,15 @@ def preprocess(df):
     :return: ts, ts_eval
     """
 
+    # reindex to day
+    df.set_index(pd.to_datetime(df.day), inplace=True)
+    df.drop(['day'],axis=1, inplace=True)
+
+    # split into train and eval
     ts_eval = df.loc[df.evaluation_set]
     ts = df.loc[~df.evaluation_set]
+
+    # drop eval column
     ts.drop(['evaluation_set'], axis=1, inplace=True)
     ts_eval.drop(['evaluation_set'], axis=1, inplace=True)
     
