@@ -48,7 +48,7 @@ def train(ts):
     """
     from statsmodels.api import tsa
 
-    model = tsa.ARMA(ts, (8,8)).fit()
+    model = tsa.ARMA(ts, (5,5)).fit()
 
     return model
 
