@@ -22,7 +22,8 @@ def preprocess(df):
     :type df: pd.DataFrame
     :return: ts, ts_eval
     """
-
+    import pandas as pd
+    
     # reindex to day
     df.set_index(pd.to_datetime(df.day), inplace=True)
     df.drop(['day'],axis=1, inplace=True)
