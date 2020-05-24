@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def preprocess(df):
     """This function takes a dataframe and preprocesses it so it is
     ready for the training stage.
@@ -22,8 +25,6 @@ def preprocess(df):
     :type df: pd.DataFrame
     :return: ts, ts_eval
     """
-    import pandas as pd
-
     # reindex to day
     df.set_index(pd.to_datetime(df.day), inplace=True)
     df.drop(['day'], axis=1, inplace=True)
@@ -75,7 +76,7 @@ def predict(model, ts_test):
 
     ts_eval_a = ts_test.reset_index().rename(columns={'day': 'ds', 'consumption': 'y'})
 
-    model_predictions = forecast_model.predict( ts_eval_a )
+    model_predictions = model.predict( ts_eval_a )
     y_predict_p = model_predictions[['ds','yhat']] 
     y_predict_p['day'] = y_predict_p['ds']
     y_predict_p.set_index(pd.to_datetime(y_predict_p.day), inplace=True)
