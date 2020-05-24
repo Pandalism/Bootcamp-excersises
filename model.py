@@ -46,9 +46,12 @@ def train(ts):
     :type ts: pd.DataFrame
     :return: a trained model
     """
-    from statsmodels.api import tsa
+    from fbprophet import Prophet
 
-    model = tsa.ARMA(ts, (5,5)).fit()
+    ts_a = ts.reset_index().rename(columns={'day': 'ds', 'consumption': 'y'})
+
+    model = Prophet( growth='linear',  weekly_seasonality=5, yearly_seasonality=5)
+    model.fit(ts_a)
 
     return model
 
@@ -69,5 +72,13 @@ def predict(model, ts_test):
     :param ts_test: a processed test time serie (on KATE it will be ts_eval)
     :return: y_pred, your predictions
     """
-    y_pred = model.predict(start=ts_test.index[0], end=ts_test.index[-1])
-    return y_pred
+
+    ts_eval_a = ts_test.reset_index().rename(columns={'day': 'ds', 'consumption': 'y'})
+
+    model_predictions = forecast_model.predict( ts_eval_a )
+    y_predict_p = model_predictions[['ds','yhat']] 
+    y_predict_p['day'] = y_predict_p['ds']
+    y_predict_p.set_index(pd.to_datetime(y_predict_p.day), inplace=True)
+    y_predict_p.drop(['day','ds'],axis=1, inplace=True)
+
+    return y_predict_p['yhat']
