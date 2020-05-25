@@ -19,7 +19,7 @@ def unique_business_names_count():
     :return: a string representing the SQL query
     :rtype: str
     """
-    return "SELECT DISTINCT count(name) FROM businesses"
+    return "SELECT count(DISTINCT name) as 'unique restaurant name count' FROM businesses"
 
 
 def first_and_last_investigation():
@@ -48,4 +48,4 @@ def business_local_owner_reg_count():
     :return: a string representing the SQL query
     :rtype: str
     """
-    return "SELECT count(business_certificate) FROM businesses"
+    return "SELECT count(business_certificate) FROM businesses WHERE (postal_code == owner_zip)"
