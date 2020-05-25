@@ -18,7 +18,7 @@ def freq_risk_per_violation_water():
     :return: a string representing the SQL query
     :rtype: str
     """
-    return "SELECT risk_category, count(*) FROM violations WHERE description LIKE '%water%' GROUP BY risk_category"
+    return "SELECT risk_category, count(*) FROM violations WHERE description LIKE '%water%' GROUP BY risk_category ORDER BY count(*) DESC"
 
 
 def frequency_of_inspections_types():
@@ -42,7 +42,7 @@ def avg_score_by_inspection_type():
     :return: a string representing the SQL query
     :rtype: str
     """
-    return "SELECT type,ROUND((SUM(score) / COUNT(score) ),1) FROM inspections WHERE SCORE IS NOT NULL GROUP BY type ORDER BY (SUM(score) / COUNT(score)"
+    return "SELECT type,ROUND((SUM(score) / COUNT(score) ),1) FROM inspections WHERE SCORE IS NOT NULL GROUP BY type ORDER BY (SUM(score) / COUNT(score))
 
 
 def owner_per_restaurant_count():
