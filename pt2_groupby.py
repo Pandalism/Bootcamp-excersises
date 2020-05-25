@@ -42,7 +42,7 @@ def avg_score_by_inspection_type():
     :return: a string representing the SQL query
     :rtype: str
     """
-    return "SELECT type,ROUND((SUM(score) / COUNT(score) ),1) FROM inspections WHERE SCORE IS NOT NULL GROUP BY type ORDER BY (SUM(score) / COUNT(score))"
+    return "SELECT type,ROUND(AVG(score), 1) FROM inspections WHERE SCORE IS NOT NULL GROUP BY type ORDER BY AVG(score)"
 
 
 def owner_per_restaurant_count():
