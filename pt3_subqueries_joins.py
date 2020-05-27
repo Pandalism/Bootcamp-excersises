@@ -46,11 +46,11 @@ def inspection_scores_in_94103():
     """
     return """
     SELECT
-        min(score) as min_score, round(avg(score),1) as avg_score, max(score) as max_score 
+        min(score) as min_score, round(avg(score),1) as avg_score, max(score) as max_score
     FROM
         inspections
     WHERE
-        business_id 
+        business_id
             IN (
                 SELECT
                     business_id

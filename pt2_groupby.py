@@ -75,4 +75,3 @@ def owner_per_restaurant_count():
     GROUP BY
         owner_name
     ORDER BY count(owner_name) DESC LIMIT 10"""
-
