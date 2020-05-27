@@ -46,7 +46,7 @@ def inspection_scores_in_94103():
     """
     return """
     SELECT
-        min(score) as min_score, round(avg(score),1) as avg_score, max(score) as max_score, 
+        min(score) as min_score, round(avg(score),1) as avg_score, max(score) as max_score 
     FROM
         inspections
     WHERE
@@ -83,7 +83,7 @@ def risk_categories_in_94103():
                 FROM
                     businesses
                 WHERE
-                    (postal_code == 94103) AND (address LIKE '%market%')
+                    postal_code == 94103
             )
     GROUP BY risk_category
     ORDER BY frequency DESC
