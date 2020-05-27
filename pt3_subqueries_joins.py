@@ -46,7 +46,7 @@ def inspection_scores_in_94103():
     """
     return """
     SELECT
-        max(score), min(score), round(avg(score),1)
+        min(score) as min_score, round(avg(score),1) as avg_score, max(score) as max_score, 
     FROM
         inspections
     WHERE
@@ -70,4 +70,21 @@ def risk_categories_in_94103():
     :return: a string representing the SQL query
     :rtype: str
     """
-    raise NotImplementedError
+    return """
+    SELECT 
+        risk_category, count(*) as frequency
+    FROM 
+        violations 
+    WHERE 
+        business_id
+            IN (
+                SELECT
+                    business_id
+                FROM
+                    businesses
+                WHERE
+                    (postal_code == 94103) AND (address LIKE '%market%')
+            )
+    GROUP BY risk_category
+    ORDER BY frequency DESC
+    """
