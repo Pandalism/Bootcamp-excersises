@@ -12,26 +12,26 @@ def top_postcodes_for_chain_stores():
     :rtype: str
     """
     return """
-    SELECT 
+    SELECT
         postal_code, count(postal_code)
-    FROM 
+    FROM
         businesses
     WHERE
-        owner_name 
+        owner_name
     IN (
-        SELECT 
+        SELECT
             owner_name
-        FROM 
-            businesses 
-        GROUP BY 
+        FROM
+            businesses
+        GROUP BY
             owner_name
-        HAVING 
+        HAVING
             count(owner_name) >= 5
     )
-    GROUP BY 
-        postal_code 
-    ORDER BY 
-        count(postal_code) DESC 
+    GROUP BY
+        postal_code
+    ORDER BY
+        count(postal_code) DESC
     LIMIT 10;"""
 
 
@@ -71,11 +71,11 @@ def risk_categories_in_94103():
     :rtype: str
     """
     return """
-    SELECT 
+    SELECT
         risk_category, count(*) as frequency
-    FROM 
-        violations 
-    WHERE 
+    FROM
+        violations
+    WHERE
         business_id
             IN (
                 SELECT

@@ -29,7 +29,7 @@ def first_and_last_investigation():
     :return: a string representing the SQL query
     :rtype: str
     """
-    return "SELECT min(date),max(date) FROM inspections" 
+    return "SELECT min(date),max(date) FROM inspections"
 
 
 def business_local_owner_count():
