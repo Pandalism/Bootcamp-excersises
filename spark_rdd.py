@@ -81,8 +81,11 @@ def get_elements_w_same_attributes(dataset):
     :return: an RDD containing only elements with same attributes as the
     first element
     """
-    raise NotImplementedError
+    # get first element attributes
+    first_keys = list(dataset.first().keys())
 
+    # return filtered RDD
+    return dataset.filtered(lambda line: first_keys == list(line.keys()))
 
 def get_min_max_timestamps(dataset):
     """
