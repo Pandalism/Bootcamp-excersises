@@ -47,7 +47,7 @@ def get_first_element(dataset):
     :type dataset: a Spark RDD
     :return: the first element of the RDD
     """
-    raise NotImplementedError
+    raise dataset.first()
 
 
 def get_all_attributes(dataset):
@@ -60,7 +60,14 @@ def get_all_attributes(dataset):
     :type dataset: a Spark RDD
     :return: all unique attributes collected in a list
     """
-    raise NotImplementedError
+    # collect all keys in all elements
+    keys = dataset.flatMap(lambda element: element.keys())
+
+    # find the distinct keys
+    unique = keys.distinct()
+
+    # return result as list
+    return unique.collect()
 
 
 def get_elements_w_same_attributes(dataset):
