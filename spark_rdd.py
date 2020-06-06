@@ -86,7 +86,7 @@ def get_elements_w_same_attributes(dataset):
 
     # return filtered RDD
     return dataset.filter(lambda line: first_keys == list(line.keys()))
-    
+
 
 def get_min_max_timestamps(dataset):
     """
@@ -99,7 +99,10 @@ def get_min_max_timestamps(dataset):
     :return: min and max timestamp in a tuple object
     :rtype: tuple
     """
-    raise NotImplementedError
+    # extract timestamps
+    timestamps = dataset.map(lambda line: extract_time(line.get('created_at_i'))
+
+    return (timestamps.min(), timestamps.max())
 
 
 def get_number_of_posts_per_bucket(dataset, min_time, max_time):
