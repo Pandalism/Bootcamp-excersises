@@ -47,7 +47,7 @@ def get_first_element(dataset):
     :type dataset: a Spark RDD
     :return: the first element of the RDD
     """
-    raise dataset.take(1)
+    return dataset.first()
 
 
 def get_all_attributes(dataset):
