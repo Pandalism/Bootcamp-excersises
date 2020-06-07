@@ -116,8 +116,8 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     :param max_time: Maximum time to consider for buckets (datetime format)
     :return: an RDD with number of elements per bucket
     """
-    # filter through all dataset and find bucket location and asign as (key,1)
-    bucketset = dataset.map(lambda rec: (spark_rdd.get_bucket(rec, 1160418111, 1401351940), 1))
+        # filter through all dataset and find hour and assign as (key,1)
+    bucketset = dataset.map(lambda rec: (get_bucket(rec, 1160418111, 1401351940), 1))
 
     # reduce by key with a moving sum
     output = bucketset.reduceByKey(lambda c1, c2: c1 + c2)
@@ -134,7 +134,13 @@ def get_number_of_posts_per_hour(dataset):
     :type dataset: a Spark RDD
     :return: an RDD with number of elements per hour
     """
-    raise NotImplementedError
+    # filter through all dataset and find bucket location and asign as (key,1)
+    hourset = dataset.map(lambda rec: (get_hour(rec), 1))
+
+    # reduce by key with a moving sum
+    output = hourset.reduceByKey(lambda c1, c2: c1 + c2)
+
+    return output
 
 
 def get_score_per_hour(dataset):
