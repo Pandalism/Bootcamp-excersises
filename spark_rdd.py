@@ -246,4 +246,15 @@ def get_title_length_distribution(dataset):
     :type dataset: a Spark RDD
     :return: an RDD with the number of submissions per title length
     """
-    raise NotImplementedError
+    # filter through all dataset and title length and asign as (key, 1))
+    # wherein key is the title length, and 1 is to help count 
+    titleset = dataset.map(lambda rec: 
+        (len(get_words(rec.get('title', ""))),
+        (gt_200(rec.get('points')), 1)))
+
+    # reduce by key with a moving sum on count 
+    sumset = titleset.reduceByKey(lambda c1, c2: c1 + c2)
+
+
+    return sumset
+
