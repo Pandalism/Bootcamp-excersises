@@ -187,7 +187,23 @@ def get_proportion_of_scores(dataset):
     :type dataset: a Spark RDD
     :return: an RDD with the proportion of scores over 200 per hour
     """
-    raise NotImplementedError
+    # set function to output 1 if gt 200 otherwise 0
+    def gt_200(x):
+        bool_int = 0
+        if x > 200:
+            bool_int = 1
+    return bool_int
+
+    # filter through all dataset and find bucket location and asign as (key,(gt_200(), 1))
+    # wherein key is the hour, gt_200(score) is 1 or 0, and 1 is to help count 
+    hourset = dataset.map(lambda rec: (get_hour(rec), (gt_200(rec.get('points')), 1)))
+
+    # reduce by key with a moving sum on both score and count 
+    sumset = hourset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
+
+    # go through sums and find the averages
+    output = sumset.map(lambda rec: (rec[0], rec[1][0]/rec[1][1]))
+    return output
 
 
 def get_proportion_of_success(dataset):
