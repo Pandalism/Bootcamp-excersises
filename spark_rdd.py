@@ -120,8 +120,8 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     epoch = dt.utcfromtimestamp(0)
 
     def unix_time_millis(dt):
-        return (dt - epoch).total_seconds() * 1000.0
-    
+        return int((dt - epoch).total_seconds())
+
     min_time_i = unix_time_millis(min_time)
     max_time_i = unix_time_millis(max_time)
 
