@@ -116,8 +116,17 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     :param max_time: Maximum time to consider for buckets (datetime format)
     :return: an RDD with number of elements per bucket
     """
-        # filter through all dataset and find hour and assign as (key,1)
-    bucketset = dataset.map(lambda rec: (get_bucket(rec, min_time, max_time), 1))
+    # convert min & max time to 
+    epoch = dt.utcfromtimestamp(0)
+
+    def unix_time_millis(dt):
+        return (dt - epoch).total_seconds() * 1000.0
+    
+    min_time_i = unix_time_millis(min_time)
+    max_time_i = unix_time_millis(max_time)
+
+    # filter through all dataset and find hour and assign as (key,1)
+    bucketset = dataset.map(lambda rec: (get_bucket(rec, min_time_i, max_time_i), 1))
 
     # reduce by key with a moving sum
     output = bucketset.reduceByKey(lambda c1, c2: c1 + c2)
