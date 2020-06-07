@@ -22,6 +22,13 @@ def get_bucket(rec, min_timestamp, max_timestamp):
     interval = (max_timestamp - min_timestamp + 1) / 200.0
     return int((rec["created_at_i"] - min_timestamp) / interval)
 
+# set function to output 1 if gt 200 otherwise 0
+def gt_200(x):
+    bool_int = 0
+    if x > 200:
+        bool_int = 1
+    return bool_int
+
 
 # Beginning of the exercise.
 
@@ -187,13 +194,6 @@ def get_proportion_of_scores(dataset):
     :type dataset: a Spark RDD
     :return: an RDD with the proportion of scores over 200 per hour
     """
-    # set function to output 1 if gt 200 otherwise 0
-    def gt_200(x):
-        bool_int = 0
-        if x > 200:
-            bool_int = 1
-        return bool_int
-
     # filter through all dataset and find bucket location and asign as (key,(gt_200(), 1))
     # wherein key is the hour, gt_200(score) is 1 or 0, and 1 is to help count 
     hourset = dataset.map(lambda rec: (get_hour(rec), (gt_200(rec.get('points')), 1)))
