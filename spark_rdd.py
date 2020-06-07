@@ -100,7 +100,7 @@ def get_min_max_timestamps(dataset):
     :rtype: tuple
     """
     # extract timestamps
-    timestamps = dataset.map(lambda line: extract_time(line.get('created_at_i'))
+    timestamps = dataset.map(lambda line: extract_time(line.get('created_at_i')))
 
     return (timestamps.min(), timestamps.max())
 
@@ -116,6 +116,11 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     :param max_time: Maximum time to consider for buckets (datetime format)
     :return: an RDD with number of elements per bucket
     """
+    # filter through all dataset
+    dataset.map()
+
+    get_bucket(rec, min_timestamp, max_timestamp)
+    get_bucket
     raise NotImplementedError
 
 
