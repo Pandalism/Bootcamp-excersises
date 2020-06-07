@@ -225,7 +225,7 @@ def get_proportion_of_success(dataset):
     # wherein key is the title length, gt_200(score) is 1 or 0, and 1 is to help count
     titleset = dataset.map(lambda rec:
                            (len(get_words(rec.get('title', ""))),
-                            gt_200(rec.get('points')), 1)))
+                            (gt_200(rec.get('points')), 1)))
 
     # reduce by key with a moving sum on both score and count
     sumset = titleset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
