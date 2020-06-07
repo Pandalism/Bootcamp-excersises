@@ -154,7 +154,16 @@ def get_score_per_hour(dataset):
     :type dataset: a Spark RDD
     :return: an RDD with average score per hour
     """
-    raise NotImplementedError
+    # filter through all dataset and find bucket location and asign as (key,(score, 1))
+    # wherein key is the hour, score 
+    hourset = dataset.map(lambda rec: (get_hour(rec), (rec.get('points'), 1)))
+
+    # reduce by key with a moving sum on both score and count 
+    sumset = hourset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
+
+    # go through sums and find the averages
+    output = sumset.map(lambda rec: (rec[0], rec[1][0]/rec[1][1]))
+    return output
 
 
 def get_proportion_of_scores(dataset):
