@@ -126,6 +126,7 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     """
     # set up conversion function
     epoch = dt.utcfromtimestamp(0)
+    
     def unix_time_millis(dt_convert):
         return int((dt_convert - epoch).total_seconds())
 
@@ -223,8 +224,8 @@ def get_proportion_of_success(dataset):
     # filter through all dataset and title length and asign as (key,(gt_200(), 1))
     # wherein key is the title length, gt_200(score) is 1 or 0, and 1 is to help count
     titleset = dataset.map(lambda rec:
-                             (len(get_words(rec.get('title', ""))),
-                             (gt_200(rec.get('points')), 1)))
+                           (len(get_words(rec.get('title', ""))),
+                            gt_200(rec.get('points')), 1)))
 
     # reduce by key with a moving sum on both score and count
     sumset = titleset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
@@ -250,7 +251,7 @@ def get_title_length_distribution(dataset):
     # filter through all dataset and title length and asign as (key, 1))
     # wherein key is the title length, and 1 is to help count
     titleset = dataset.map(lambda rec:
-                             (len(get_words(rec.get('title', ""))), 1))
+                        (len(get_words(rec.get('title', ""))), 1))
 
     # reduce by key with a moving sum on count
     sumset = titleset.reduceByKey(lambda c1, c2: c1 + c2)
