@@ -22,6 +22,7 @@ def get_bucket(rec, min_timestamp, max_timestamp):
     interval = (max_timestamp - min_timestamp + 1) / 200.0
     return int((rec["created_at_i"] - min_timestamp) / interval)
 
+
 # set function to output 1 if gt 200 otherwise 0
 def gt_200(x):
     bool_int = 0
@@ -123,12 +124,12 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     :param max_time: Maximum time to consider for buckets (datetime format)
     :return: an RDD with number of elements per bucket
     """
-    # convert min & max time to 
+    # set up conversion function
     epoch = dt.utcfromtimestamp(0)
+    def unix_time_millis(dt_convert):
+        return int((dt_convert - epoch).total_seconds())
 
-    def unix_time_millis(dt):
-        return int((dt - epoch).total_seconds())
-
+    # convert min & max time to seconds since utc
     min_time_i = unix_time_millis(min_time)
     max_time_i = unix_time_millis(max_time)
 
@@ -171,10 +172,10 @@ def get_score_per_hour(dataset):
     :return: an RDD with average score per hour
     """
     # filter through all dataset and find bucket location and asign as (key,(score, 1))
-    # wherein key is the hour, score 
+    # wherein key is the hour, score
     hourset = dataset.map(lambda rec: (get_hour(rec), (rec.get('points'), 1)))
 
-    # reduce by key with a moving sum on both score and count 
+    # reduce by key with a moving sum on both score and count
     sumset = hourset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
 
     # go through sums and find the averages
@@ -195,10 +196,10 @@ def get_proportion_of_scores(dataset):
     :return: an RDD with the proportion of scores over 200 per hour
     """
     # filter through all dataset and find bucket location and asign as (key,(gt_200(), 1))
-    # wherein key is the hour, gt_200(score) is 1 or 0, and 1 is to help count 
+    # wherein key is the hour, gt_200(score) is 1 or 0, and 1 is to help count
     hourset = dataset.map(lambda rec: (get_hour(rec), (gt_200(rec.get('points')), 1)))
 
-    # reduce by key with a moving sum on both score and count 
+    # reduce by key with a moving sum on both score and count
     sumset = hourset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
 
     # go through sums and find the averages
@@ -220,12 +221,12 @@ def get_proportion_of_success(dataset):
     :return: an RDD with the proportion of successful post per title length
     """
     # filter through all dataset and title length and asign as (key,(gt_200(), 1))
-    # wherein key is the title length, gt_200(score) is 1 or 0, and 1 is to help count 
-    titleset = dataset.map(lambda rec: 
-        (len(get_words(rec.get('title', ""))),
-        (gt_200(rec.get('points')), 1)))
+    # wherein key is the title length, gt_200(score) is 1 or 0, and 1 is to help count
+    titleset = dataset.map(lambda rec:
+                             (len(get_words(rec.get('title', ""))),
+                             (gt_200(rec.get('points')), 1)))
 
-    # reduce by key with a moving sum on both score and count 
+    # reduce by key with a moving sum on both score and count
     sumset = titleset.reduceByKey(lambda c1, c2: (c1[0] + c2[0], c1[1] + c2[1]))
 
     # go through sums and find the averages
@@ -247,12 +248,11 @@ def get_title_length_distribution(dataset):
     :return: an RDD with the number of submissions per title length
     """
     # filter through all dataset and title length and asign as (key, 1))
-    # wherein key is the title length, and 1 is to help count 
-    titleset = dataset.map(lambda rec: 
-        (len(get_words(rec.get('title', ""))), 1))
+    # wherein key is the title length, and 1 is to help count
+    titleset = dataset.map(lambda rec:
+                             (len(get_words(rec.get('title', ""))), 1))
 
-    # reduce by key with a moving sum on count 
+    # reduce by key with a moving sum on count
     sumset = titleset.reduceByKey(lambda c1, c2: c1 + c2)
 
     return sumset
-
