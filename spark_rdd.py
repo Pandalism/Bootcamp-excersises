@@ -192,7 +192,7 @@ def get_proportion_of_scores(dataset):
         bool_int = 0
         if x > 200:
             bool_int = 1
-    return bool_int
+        return bool_int
 
     # filter through all dataset and find bucket location and asign as (key,(gt_200(), 1))
     # wherein key is the hour, gt_200(score) is 1 or 0, and 1 is to help count 
