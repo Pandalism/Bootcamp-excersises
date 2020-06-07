@@ -117,7 +117,7 @@ def get_number_of_posts_per_bucket(dataset, min_time, max_time):
     :return: an RDD with number of elements per bucket
     """
         # filter through all dataset and find hour and assign as (key,1)
-    bucketset = dataset.map(lambda rec: (get_bucket(rec, 1160418111, 1401351940), 1))
+    bucketset = dataset.map(lambda rec: (get_bucket(rec, min_time, max_time), 1))
 
     # reduce by key with a moving sum
     output = bucketset.reduceByKey(lambda c1, c2: c1 + c2)
