@@ -23,6 +23,9 @@ class Preprocessor(BaseEstimator, TransformerMixin):
 def keras_builder():
     model = Sequential()
     model.add(Dense(16, input_shape=(784,), activation="relu"))
+    model.add(Dense(16, input_shape=(784,), activation="relu"))
+    model.add(Dense(16, input_shape=(784,), activation="relu"))
+    model.add(Dense(16, input_shape=(784,), activation="relu"))
     model.add(Dense(4, activation="softmax"))
     model.compile(
         optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"]
