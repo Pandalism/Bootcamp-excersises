@@ -58,6 +58,6 @@ def build_model():
     """
     preprocessor = Preprocessor()
 
-    model = KerasClassifier(build_fn=keras_builder, batch_size=32, epochs=15)
+    model = KerasClassifier(build_fn=keras_builder, batch_size=32, epochs=25)
 
     return Pipeline([("preprocessor", preprocessor), ("model", model)])
