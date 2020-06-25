@@ -28,12 +28,13 @@ class Preprocessor(BaseEstimator, TransformerMixin):
 def keras_builder():
     model = Sequential([
         layers.ZeroPadding2D((1, 1), input_shape=[28, 28, 1]),
+        layers.Conv2D(8, kernel_size=(3, 3), activation="relu"),
         layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
         layers.MaxPooling2D(pool_size=(2, 2)),
         layers.Conv2D(64, kernel_size=(3, 3), activation="relu"),
         layers.MaxPooling2D(pool_size=(2, 2)),
-        layers.Conv2D(128, kernel_size=(3, 3), activation="relu"),
         layers.Flatten(),
+        layers.Dense(100, activation="relu"),
         layers.Dense(100, activation="relu"),
         layers.Dropout(0.5),
         layers.Dense(4, activation="softmax")
@@ -57,6 +58,6 @@ def build_model():
     """
     preprocessor = Preprocessor()
 
-    model = KerasClassifier(build_fn=keras_builder, batch_size=32, epochs=10)
+    model = KerasClassifier(build_fn=keras_builder, batch_size=32, epochs=5)
 
     return Pipeline([("preprocessor", preprocessor), ("model", model)])
