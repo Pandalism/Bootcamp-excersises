@@ -16,6 +16,15 @@ def train_model():
     X = np.load(os.sep.join([DATA_DIR, X_TRAIN_NAME]))
     y = np.load(os.sep.join([DATA_DIR, Y_TRAIN_NAME]))
 
+    # create flipped images
+    X_flip = np.flip(X, axis=-1)
+    
+    # merge flipped images
+    X = np.concatenate((X, X_flip), axis=0)
+
+    # Double length of Y
+    y = np.concatenate((y, y), axis=0)
+
     model = build_model()
     model.fit(X, y)
 

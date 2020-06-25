@@ -1,11 +1,11 @@
 from keras import layers
-from keras import Input
 from keras.models import Sequential
 from keras.utils import np_utils
 from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
 import numpy as np
+
 
 class Preprocessor(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
@@ -14,10 +14,10 @@ class Preprocessor(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         # convert to 0,1
         X = X / 255
-        
+
         # insert extra dimensions
         X = np.expand_dims(X, -1)
-        
+
         if y is None:
             return X
 
@@ -27,7 +27,7 @@ class Preprocessor(BaseEstimator, TransformerMixin):
 
 def keras_builder():
     model = Sequential([
-        layers.ZeroPadding2D((1,1), input_shape=[28,28,1]),
+        layers.ZeroPadding2D((1, 1), input_shape=[28, 28, 1]),
         layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
         layers.MaxPooling2D(pool_size=(2, 2)),
         layers.Conv2D(64, kernel_size=(3, 3), activation="relu"),
@@ -57,6 +57,6 @@ def build_model():
     """
     preprocessor = Preprocessor()
 
-    model = KerasClassifier(build_fn=keras_builder, batch_size=16, epochs=10)
+    model = KerasClassifier(build_fn=keras_builder, batch_size=32, epochs=10)
 
     return Pipeline([("preprocessor", preprocessor), ("model", model)])
