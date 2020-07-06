@@ -1,6 +1,6 @@
 from sklearn.compose import ColumnTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 
 
@@ -16,4 +16,4 @@ def build_model():
     :return: a new instance of your model
     """
     preprocessor = ColumnTransformer([("processing", TfidfVectorizer(), "text")])
-    return Pipeline([("preprocessor", preprocessor), ("model", MultinomialNB())])
+    return Pipeline([("preprocessor", preprocessor), ("model", LinearSVC())])
