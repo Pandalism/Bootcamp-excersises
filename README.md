@@ -10,3 +10,6 @@ Just a repo with the bootcamp exercises I did as part of the Cambridge Spark App
  - 07 - Ensemble Methods and Support Vector Machines
  - 08 - Neural Networks and Deep Learning
  - 09 - Natural Language Processing
+
+
+Merged using git subtree command, so the commits might be a bit wonky
