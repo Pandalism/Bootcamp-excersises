@@ -12,4 +12,4 @@ Just a repo with the bootcamp exercises I did as part of the Cambridge Spark App
  - 09 - Natural Language Processing
 
 
-Merged using git subtree command, so the commits might be a bit wonky
+Merged using git subtree command, so the commits might not be perfectly matched with the files.
